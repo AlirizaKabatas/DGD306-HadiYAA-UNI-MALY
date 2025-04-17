@@ -2,22 +2,25 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public LayerMask targetLayer;
-    public float damage = 1f;  
+    public float lifetime = 2f;
+    public int damage = 10;
 
-    void OnCollisionEnter2D(Collision2D collision)
+    void Start()
     {
-    
-        if (((1 << collision.gameObject.layer) & targetLayer) != 0)
+        Destroy(gameObject, lifetime);
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Enemy"))
         {
-            Target target = collision.gameObject.GetComponent<Target>();
-            if (target != null)
+            Enemy enemy = other.GetComponent<Enemy>();
+            if (enemy != null)
             {
-                target.TakeDamage(damage);
+                enemy.TakeDamage(damage);
             }
 
-      
-            Destroy(gameObject);
+            Destroy(gameObject); // mermi yok olur
         }
     }
 }
