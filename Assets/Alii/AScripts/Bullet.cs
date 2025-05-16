@@ -7,23 +7,29 @@ public class Bullet : MonoBehaviour
 
     void Start()
     {
-        Destroy(gameObject, lifetime);
+        Destroy(gameObject, lifetime); // Mermiyi belirtilen süre sonra yok et
     }
 
-  void OnTriggerEnter2D(Collider2D other)
-{
-    if (other.CompareTag("Enemy"))
+    void OnTriggerEnter2D(Collider2D other)
     {
-        // FlyingEnemy scriptini kontrol et
-        FlyingEnemy flyingEnemy = other.GetComponent<FlyingEnemy>();
-        if (flyingEnemy != null)
+        if (other.CompareTag("Enemy"))
         {
-            flyingEnemy.TakeDamage(damage);
+            // FlyingEnemy scriptini kontrol et
+            FlyingEnemy flyingEnemy = other.GetComponent<FlyingEnemy>();
+            if (flyingEnemy != null)
+            {
+                flyingEnemy.TakeDamage(damage);
+            }
+
+            Destroy(gameObject); // Mermiyi yok et
         }
-
-        Destroy(gameObject); // Mermiyi yok et
     }
-}
 
-
+    // Bu fonksiyon, merminin yönüne göre sprite'ı döndürüyor
+    public void SetDirection(Vector2 direction)
+    {
+        // Yönü derecelere çeviriyoruz
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle)); // Sprite'ı yönlendiriyoruz
+    }
 }

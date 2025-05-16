@@ -57,6 +57,13 @@ public class PlayerShooting : MonoBehaviour
         if (bulletRb != null)
             bulletRb.linearVelocity = direction * bulletSpeed;
 
+        // Merminin yönünü doğru şekilde ayarla
+        Bullet bulletScript = bullet.GetComponent<Bullet>();
+        if (bulletScript != null)
+        {
+            bulletScript.SetDirection(direction);
+        }
+
         ApplyRecoil(direction);
     }
 
