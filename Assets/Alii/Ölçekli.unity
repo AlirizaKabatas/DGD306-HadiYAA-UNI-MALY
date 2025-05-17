@@ -851,6 +851,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2130052185253287908, guid: b149c553c2ed7e84bbc01b534c9ffa24, type: 3}
+      propertyPath: moveSpeed
+      value: 36.6
+      objectReference: {fileID: 0}
     - target: {fileID: 4928765077188480964, guid: b149c553c2ed7e84bbc01b534c9ffa24, type: 3}
       propertyPath: m_Name
       value: ShortDudePrefab
@@ -938,6 +942,10 @@ PrefabInstance:
     - target: {fileID: 6077582155370016932, guid: b149c553c2ed7e84bbc01b534c9ffa24, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8455455505345566850, guid: b149c553c2ed7e84bbc01b534c9ffa24, type: 3}
+      propertyPath: recoilForce
+      value: 627.4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
