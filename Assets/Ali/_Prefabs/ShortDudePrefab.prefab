@@ -48,10 +48,10 @@ GameObject:
   - component: {fileID: 1102581117395711730}
   - component: {fileID: 1859820382592309207}
   - component: {fileID: 2658285317536405793}
-  - component: {fileID: 2130052185253287908}
   - component: {fileID: 5400819837717439657}
   - component: {fileID: 8455455505345566850}
   - component: {fileID: 7247308209962950396}
+  - component: {fileID: -2556490244583906510}
   m_Layer: 7
   m_Name: ShortDudePrefab
   m_TagString: Player
@@ -73,6 +73,7 @@ RectTransform:
   m_Children:
   - {fileID: 4272832415850214682}
   - {fileID: 6095989834941796248}
+  - {fileID: 2041816775225882107}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -216,24 +217,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.96, y: 2.16}
   m_EdgeRadius: 0
---- !u!114 &2130052185253287908
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4928765077188480964}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d71cda836b5addf498685031ddc874e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 25
-  jumpForce: 25
-  groundCheck: {fileID: 0}
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 8
 --- !u!114 &5400819837717439657
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -286,6 +269,23 @@ MonoBehaviour:
   enableRecoil: 1
   recoilForce: 500
   playerRb: {fileID: 1859820382592309207}
+--- !u!114 &-2556490244583906510
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4928765077188480964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5fab6bdfec2542e885be5e2ceeb554e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 1859820382592309207}
+  groundCheck: {fileID: 2041816775225882107}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!1 &7623090419730783868
 GameObject:
   m_ObjectHideFlags: 0
@@ -321,3 +321,34 @@ RectTransform:
   m_AnchoredPosition: {x: 0.32, y: -0.223}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &8173142329062183461
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2041816775225882107}
+  m_Layer: 0
+  m_Name: Ground Check
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2041816775225882107
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8173142329062183461}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.17, y: -1.31, z: -0.07042559}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6077582155370016932}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
