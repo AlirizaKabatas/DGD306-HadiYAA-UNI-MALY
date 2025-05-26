@@ -1,107 +1,190 @@
 using UnityEngine;
+using System.Collections;
 
-public class EnemyRanged : MonoBehaviour
+public class RangedEnemy : MonoBehaviour
 {
-    public float detectionRange = 10f;
-    public float attackRange = 7f;
-    public float attackInterval = 2f;
-    public float health = 100f;
-    public float damage = 10f;
-    public bool alwaysChase = false;
-
-    public Transform bulletSpawnPoint;
+    [Header("Combat Settings")]
+    public int maxHealth = 30;
+    public float detectionRange = 5f;
+    public float attackCooldown = 2f;
     public GameObject bulletPrefab;
+    public Transform bulletSpawnPoint;
+    public int attackDamage = 10;
+    public float bulletSpeed = 7f;
+    public AudioClip attackSound;
+    public AudioClip deathSound;
+    public float flashDuration = 0.2f;
+    public Animator animator;
 
-    private float attackTimer;
+
+    [Header("Shooting Settings")]
+    [Range(0f, 90f)]
+    public float fireAngle = 45f; // sadece sağa-sola 45 derece ateş
+
+    private int currentHealth;
+    private float lastAttackTime;
+    private SpriteRenderer spriteRenderer;
+    private Color originalColor;
+    private AudioSource audioSource;
     private Transform targetPlayer;
+    private Vector3 originalScale;
 
-    private Transform[] players;
-
-    private void Start()
+    void Start()
     {
-        players = new Transform[2];
-        GameObject[] foundPlayers = GameObject.FindGameObjectsWithTag("Player");
-        for (int i = 0; i < foundPlayers.Length && i < 2; i++)
-            players[i] = foundPlayers[i].transform;
-    }
+        currentHealth = maxHealth;
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        originalColor = spriteRenderer.color;
+        originalScale = transform.localScale;
 
-    private void Update()
-    {
-        if (players[0] == null && players[1] == null)
-            return;
-
-        // En yakın oyuncuyu bul
-        targetPlayer = GetClosestPlayerInDetectionRange();
-
-        if (targetPlayer != null)
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
         {
-            RotateTowardsTarget();
-
-            float distanceToPlayer = Vector2.Distance(transform.position, targetPlayer.position);
-
-            if (alwaysChase || distanceToPlayer <= detectionRange)
-            {
-                if (distanceToPlayer <= attackRange)
-                {
-                    attackTimer += Time.deltaTime;
-
-                    if (attackTimer >= attackInterval)
-                    {
-                        Attack();
-                        attackTimer = 0f;
-                    }
-                }
-            }
+            audioSource = gameObject.AddComponent<AudioSource>();
         }
     }
 
-    Transform GetClosestPlayerInDetectionRange()
+    void Update()
     {
-        Transform closest = null;
-        float minDistance = Mathf.Infinity;
-
-        foreach (var player in players)
-        {
-            if (player == null) continue;
-
-            float dist = Vector2.Distance(transform.position, player.position);
-            if (dist <= detectionRange && dist < minDistance)
-            {
-                minDistance = dist;
-                closest = player;
-            }
-        }
-
-        return closest;
-    }
-
-    void RotateTowardsTarget()
-    {
+        targetPlayer = GetNearestPlayer();
         if (targetPlayer == null) return;
 
-        Vector3 dir = targetPlayer.position - transform.position;
-        if (dir.x < 0)
-            transform.localScale = new Vector3(1, 1, 1); // sola bak
-        else
-            transform.localScale = new Vector3(-1, 1, 1); // sağa bak
-    }
-
-    void Attack()
-    {
-        if (bulletPrefab != null && bulletSpawnPoint != null)
+        float distance = Vector2.Distance(transform.position, targetPlayer.position);
+        if (distance <= detectionRange && Time.time >= lastAttackTime + attackCooldown)
         {
-            GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, Quaternion.identity);
-            Vector2 direction = (targetPlayer.position - bulletSpawnPoint.position).normalized;
-            bullet.GetComponent<Bullet>().SetDirection(direction);
+            FaceTarget(targetPlayer.position);
+            Shoot(targetPlayer.position);
+            lastAttackTime = Time.time;
+
+            if (attackSound)
+                audioSource.PlayOneShot(attackSound);
         }
     }
 
-    public void TakeDamage(float amount)
+    Transform GetNearestPlayer()
     {
-        health -= amount;
-        if (health <= 0f)
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        Transform nearest = null;
+        float minDist = Mathf.Infinity;
+
+        foreach (GameObject p in players)
         {
-            Destroy(gameObject);
+            float dist = Vector2.Distance(transform.position, p.transform.position);
+            if (dist < minDist)
+            {
+                minDist = dist;
+                nearest = p.transform;
+            }
+        }
+
+        return nearest;
+    }
+
+    void FaceTarget(Vector3 targetPos)
+    {
+        Vector3 dir = targetPos - transform.position;
+        if (dir.x < 0)
+        {
+            transform.localScale = new Vector3(originalScale.x, originalScale.y, originalScale.z);
+        }
+        else
+        {
+            transform.localScale = new Vector3(-originalScale.x, originalScale.y, originalScale.z);
+        }
+    }
+
+   void Shoot(Vector3 targetPos)
+{
+    if (bulletPrefab == null || bulletSpawnPoint == null) return;
+
+    if (animator != null)
+    {
+        animator.SetBool("isAttacking", true);
+    }
+
+    Vector2 direction = (targetPos - bulletSpawnPoint.position).normalized;
+
+    // sadece yatay (x yönünde) 45 derece açıyla atış yap (yukarı aşağı yok)
+    float angle = Vector2.Angle(Vector2.right, direction);
+    if (angle > fireAngle && angle < 180 - fireAngle)
+    {
+        if (animator != null)
+            animator.SetBool("isAttacking", false); // atış iptal edildi, bool kapat
+        return;
+    }
+
+    GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, Quaternion.identity);
+
+    Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
+    if (rb != null)
+    {
+        rb.linearVelocity = direction * bulletSpeed;
+    }
+
+    float angleZ = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+    bullet.transform.rotation = Quaternion.Euler(0, 0, angleZ);
+
+    if (direction.x > 0)
+    {
+        Vector3 scale = bullet.transform.localScale;
+        scale.x *= -1;
+        bullet.transform.localScale = scale;
+    }
+
+    Bullet b = bullet.GetComponent<Bullet>();
+    if (b != null)
+    {
+        b.damage = attackDamage;
+    }
+
+    // isAttacking'i kısa süre sonra kapat
+    Invoke(nameof(ResetAttack), 0.2f);
+}
+    void ResetAttack()
+{
+    if (animator != null)
+    {
+        animator.SetBool("isAttacking", false);
+    }
+}
+
+
+    public void TakeDamage(int damage)
+    {
+        currentHealth -= damage;
+        StartCoroutine(FlashRed());
+
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
+    }
+
+    IEnumerator FlashRed()
+    {
+        spriteRenderer.color = Color.red;
+        yield return new WaitForSeconds(flashDuration);
+        spriteRenderer.color = originalColor;
+    }
+
+    void Die()
+    {
+        if (deathSound)
+            audioSource.PlayOneShot(deathSound);
+
+        Destroy(gameObject);
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Bullet"))
+        {
+            Bullet bullet = other.GetComponent<Bullet>();
+            if (bullet != null)
+            {
+                TakeDamage(bullet.damage);
+            }
+
+            Destroy(other.gameObject);
         }
     }
 }
