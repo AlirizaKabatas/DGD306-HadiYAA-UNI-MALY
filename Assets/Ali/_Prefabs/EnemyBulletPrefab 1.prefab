@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 7254914754723293989}
   - component: {fileID: -5865655399980933288}
   - component: {fileID: -8767690220064634529}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: EnemyBulletPrefab 1
-  m_TagString: Bullet
+  m_TagString: EnemyBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
