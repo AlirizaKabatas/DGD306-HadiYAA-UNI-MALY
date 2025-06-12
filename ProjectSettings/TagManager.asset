@@ -59,7 +59,10 @@ TagManager:
   - name: Enemy
     uniqueID: 1515733951
     locked: 0
-  - name: Player
+  - name: PlayerLegs
+    uniqueID: 500882241
+    locked: 0
+  - name: PlayerBody
     uniqueID: 740444235
     locked: 0
   m_RenderingLayers:
