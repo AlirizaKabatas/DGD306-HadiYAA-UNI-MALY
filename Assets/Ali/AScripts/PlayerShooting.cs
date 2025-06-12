@@ -14,12 +14,25 @@ public class PlayerShooting : MonoBehaviour
     public float recoilForce = 5f;
     public Rigidbody2D playerRb;
 
+    [Header("Üst Vücut")]
+    [SerializeField] private SpriteRenderer upperBodyRenderer;
+
+    [SerializeField] private Sprite spriteRight;
+    [SerializeField] private Sprite spriteRightUp;
+    [SerializeField] private Sprite spriteUp;
+    [SerializeField] private Sprite spriteLeftUp;
+    [SerializeField] private Sprite spriteLeft;
+    [SerializeField] private Sprite spriteLeftDown;
+    [SerializeField] private Sprite spriteDown;
+    [SerializeField] private Sprite spriteRightDown;
+
     void Update()
     {
+        Vector2 shootDirection = GetShootDirection();
+        UpdateUpperBodySprite(shootDirection);
+
         if (Input.GetMouseButton(0) && Time.time >= lastFireTime + (1f / fireRate))
         {
-            Vector2 shootDirection = GetShootDirection();
-
             if (shootDirection != Vector2.zero)
             {
                 Shoot(shootDirection);
@@ -30,21 +43,18 @@ public class PlayerShooting : MonoBehaviour
 
     Vector2 GetShootDirection()
     {
-        // WASD input kontrolü
         bool up = Input.GetKey(KeyCode.W);
         bool down = Input.GetKey(KeyCode.S);
         bool left = Input.GetKey(KeyCode.A);
         bool right = Input.GetKey(KeyCode.D);
 
-        // 6 yön belirleme (yukarı ve aşağı yok)
-        if (right && up) return new Vector2(1, 1).normalized;     // Sağ üst
-        if (right && down) return new Vector2(1, -1).normalized;  // Sağ alt
-        if (left && up) return new Vector2(-1, 1).normalized;     // Sol üst
-        if (left && down) return new Vector2(-1, -1).normalized;  // Sol alt
-        if (right) return Vector2.right;                          // Sağ
-        if (left) return Vector2.left;                            // Sol
+        if (right && up) return new Vector2(1, 1).normalized;
+        if (right && down) return new Vector2(1, -1).normalized;
+        if (left && up) return new Vector2(-1, 1).normalized;
+        if (left && down) return new Vector2(-1, -1).normalized;
+        if (right) return Vector2.right;
+        if (left) return Vector2.left;
 
-        // WASD basılmıyorsa karakter yönüne göre ateş et
         if (transform.localScale.x > 0) return Vector2.right;
         else return Vector2.left;
     }
@@ -57,7 +67,6 @@ public class PlayerShooting : MonoBehaviour
         if (bulletRb != null)
             bulletRb.linearVelocity = direction * bulletSpeed;
 
-        // Merminin yönünü doğru şekilde ayarla
         Bullet bulletScript = bullet.GetComponent<Bullet>();
         if (bulletScript != null)
         {
@@ -71,7 +80,6 @@ public class PlayerShooting : MonoBehaviour
     {
         if (!enableRecoil || playerRb == null) return;
 
-        // Sadece sola veya sağa recoil uygula
         Vector2 recoilDir = Vector2.zero;
 
         if (direction.x > 0)
@@ -81,5 +89,19 @@ public class PlayerShooting : MonoBehaviour
 
         if (recoilDir != Vector2.zero)
             playerRb.AddForce(recoilDir * recoilForce, ForceMode2D.Impulse);
+    }
+
+    void UpdateUpperBodySprite(Vector2 direction)
+    {
+        direction = direction.normalized;
+
+        if (direction == new Vector2(1, 1).normalized) upperBodyRenderer.sprite = spriteRightUp;
+        else if (direction == new Vector2(1, -1).normalized) upperBodyRenderer.sprite = spriteRightDown;
+        else if (direction == new Vector2(-1, 1).normalized) upperBodyRenderer.sprite = spriteLeftUp;
+        else if (direction == new Vector2(-1, -1).normalized) upperBodyRenderer.sprite = spriteLeftDown;
+        else if (direction == Vector2.right) upperBodyRenderer.sprite = spriteRight;
+        else if (direction == Vector2.left) upperBodyRenderer.sprite = spriteLeft;
+        else if (direction == Vector2.up) upperBodyRenderer.sprite = spriteUp;
+        else if (direction == Vector2.down) upperBodyRenderer.sprite = spriteDown;
     }
 }
