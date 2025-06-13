@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/Ali/Animations/Bosses/Level1Boss_Spider/SpiderBoss_Attack_Anim.meta
 guid: 04d0c681181bf5f4bbef176ba8f678a3
+=======
+guid: 74489938bbc7c44f89e832622649edc9
+>>>>>>> 34762df04232b6252a03ba6bb0a9d7b2de47e366:Assets/ARDA/Level1Boss_Spider/SpiderBoss_Attack_Anim.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
