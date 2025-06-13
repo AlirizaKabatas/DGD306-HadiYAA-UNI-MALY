@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3868999553193478662}
   - component: {fileID: 323702900956611069}
   m_Layer: 0
-  m_Name: "K\xF6pkeEnemy"
+  m_Name: Enemy_Dog
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
