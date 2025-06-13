@@ -7,50 +7,52 @@ public class PlayerShooting : MonoBehaviour
 {
     [Header("Mermi Ayarları")]
     public GameObject bulletPrefab;
-    public List<Transform> firePoints = new List<Transform>();
     public float bulletSpeed = 10f;
     public float fireRate = 5f;
     public int magazineSize = 24;
     public float reloadDuration = 2f;
     public bool autoReload = true;
-
-    private float lastFireTime;
     private int currentAmmo;
+    private float lastFireTime;
     private bool isReloading = false;
+
+    [Header("Fire Points (Açı Bazlı)")]
+    public List<Transform> firePoints_Right;
+    public List<Transform> firePoints_RightUp;
+    public List<Transform> firePoints_RightDown;
+    public List<Transform> firePoints_Left;
+    public List<Transform> firePoints_LeftUp;
+    public List<Transform> firePoints_LeftDown;
 
     [Header("Geri Tepme")]
     public bool enableRecoil = true;
     public float recoilForce = 5f;
     public Rigidbody2D playerRb;
 
-    [Header("VFX ve SFX")]
+    [Header("VFX & SFX")]
     public GameObject muzzleFlashPrefab;
     public AudioClip shootSfx;
     public AudioClip reloadSfx;
     public AudioSource audioSource;
 
     [Header("UI")]
-    public Text ammoText;           // Örn: 24/∞
-    public GameObject reloadUI;     // Reload görseli
+    public Text ammoText;
+    public GameObject reloadUI;
 
-    [Header("Üst Vücut Spriteları")]
+    [Header("Üst Vücut Sprite")]
     [SerializeField] private SpriteRenderer upperBodyRenderer;
-
     [SerializeField] private Sprite spriteRight;
     [SerializeField] private Sprite spriteRightUp;
-    [SerializeField] private Sprite spriteUp;
-    [SerializeField] private Sprite spriteLeftUp;
-    [SerializeField] private Sprite spriteLeft;
-    [SerializeField] private Sprite spriteLeftDown;
-    [SerializeField] private Sprite spriteDown;
     [SerializeField] private Sprite spriteRightDown;
+    [SerializeField] private Sprite spriteLeft;
+    [SerializeField] private Sprite spriteLeftUp;
+    [SerializeField] private Sprite spriteLeftDown;
 
     void Start()
     {
         currentAmmo = magazineSize;
         UpdateAmmoUI();
-        if (reloadUI != null)
-            reloadUI.SetActive(false);
+        if (reloadUI != null) reloadUI.SetActive(false);
     }
 
     void Update()
@@ -64,7 +66,7 @@ public class PlayerShooting : MonoBehaviour
         {
             if (shootDirection != Vector2.zero && currentAmmo > 0)
             {
-                StartCoroutine(ShootSequence(shootDirection));
+                StartCoroutine(ShootFromDirection(shootDirection));
                 lastFireTime = Time.time;
             }
             else if (currentAmmo <= 0 && autoReload)
@@ -92,22 +94,22 @@ public class PlayerShooting : MonoBehaviour
         if (left && down) return new Vector2(-1, -1).normalized;
         if (right) return Vector2.right;
         if (left) return Vector2.left;
-        if (up) return Vector2.up;
-        if (down) return Vector2.down;
 
         return transform.localScale.x > 0 ? Vector2.right : Vector2.left;
     }
 
-    IEnumerator ShootSequence(Vector2 direction)
+    IEnumerator ShootFromDirection(Vector2 direction)
     {
-        foreach (Transform firePoint in firePoints)
+        List<Transform> selectedFirePoints = GetFirePointsByDirection(direction);
+
+        foreach (Transform firePoint in selectedFirePoints)
         {
             if (currentAmmo <= 0) break;
 
             Shoot(direction, firePoint);
             currentAmmo--;
             UpdateAmmoUI();
-            yield return new WaitForSeconds(0.03f); // aradaki gecikme
+            yield return new WaitForSeconds(0.03f); // aralıklı atış
         }
 
         if (currentAmmo <= 0 && autoReload)
@@ -116,12 +118,26 @@ public class PlayerShooting : MonoBehaviour
         }
     }
 
+    List<Transform> GetFirePointsByDirection(Vector2 dir)
+    {
+        dir = dir.normalized;
+
+        if (dir == new Vector2(1, 1).normalized) return firePoints_RightUp;
+        if (dir == new Vector2(1, -1).normalized) return firePoints_RightDown;
+        if (dir == new Vector2(-1, 1).normalized) return firePoints_LeftUp;
+        if (dir == new Vector2(-1, -1).normalized) return firePoints_LeftDown;
+        if (dir == Vector2.right) return firePoints_Right;
+        if (dir == Vector2.left) return firePoints_Left;
+
+        return firePoints_Right; // default fallback
+    }
+
     void Shoot(Vector2 direction, Transform firePoint)
     {
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
-        Rigidbody2D bulletRb = bullet.GetComponent<Rigidbody2D>();
-        if (bulletRb != null)
-            bulletRb.linearVelocity = direction * bulletSpeed;
+        Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
+        if (rb != null)
+            rb.linearVelocity = direction * bulletSpeed;
 
         if (muzzleFlashPrefab != null)
             Instantiate(muzzleFlashPrefab, firePoint.position, firePoint.rotation);
@@ -177,7 +193,5 @@ public class PlayerShooting : MonoBehaviour
         else if (direction == new Vector2(-1, -1).normalized) upperBodyRenderer.sprite = spriteLeftDown;
         else if (direction == Vector2.right) upperBodyRenderer.sprite = spriteRight;
         else if (direction == Vector2.left) upperBodyRenderer.sprite = spriteLeft;
-        else if (direction == Vector2.up) upperBodyRenderer.sprite = spriteUp;
-        else if (direction == Vector2.down) upperBodyRenderer.sprite = spriteDown;
     }
 }
