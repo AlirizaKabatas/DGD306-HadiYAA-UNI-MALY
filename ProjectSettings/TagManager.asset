@@ -21,7 +21,7 @@ TagManager:
   - Player
   - Bullet
   - Background
-  - 
+  - MeleeEnemy
   - 
   - 
   - 
@@ -64,6 +64,9 @@ TagManager:
     locked: 0
   - name: PlayerBody
     uniqueID: 740444235
+    locked: 0
+  - name: EnemyMelee
+    uniqueID: 2808961691
     locked: 0
   m_RenderingLayers:
   - Default

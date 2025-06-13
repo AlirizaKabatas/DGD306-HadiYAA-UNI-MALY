@@ -138,7 +138,7 @@ GameObject:
   - component: {fileID: 6485020406122691016}
   - component: {fileID: 72622489951517780}
   m_Layer: 7
-  m_Name: HelmetDudePrefab
+  m_Name: Ch_HelmetDude
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -169,7 +169,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1002.45, y: -1162.6573}
+  m_AnchoredPosition: {x: -1039.3748, y: -1162.7072}
   m_SizeDelta: {x: 63.3756, y: 81.613}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2030435543972365136

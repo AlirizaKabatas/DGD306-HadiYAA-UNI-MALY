@@ -66,20 +66,31 @@ public class FlyingEnemy : MonoBehaviour
         }
     }
 
-    void ChasePlayer(float distance)
+   void ChasePlayer(float distance)
+{
+    Vector2 direction = (player.position - transform.position).normalized;
+    Vector2 randomOffset = randomDirection * randomMovementFactor;
+    Vector2 finalDirection = (direction + randomOffset).normalized;
+
+    Vector2 newPosition = (Vector2)transform.position + finalDirection * speed * Time.deltaTime;
+    GetComponent<Rigidbody2D>().MovePosition(newPosition);
+
+    if (Random.value < 0.05f)
     {
-        Vector2 direction = (player.position - transform.position).normalized;
-        Vector2 randomOffset = randomDirection * randomMovementFactor;
-        Vector2 finalDirection = (direction + randomOffset).normalized;
-
-        Vector2 newPosition = (Vector2)transform.position + finalDirection * speed * Time.deltaTime;
-        GetComponent<Rigidbody2D>().MovePosition(newPosition);
-
-        if (Random.value < 0.05f)
-        {
-            randomDirection = Random.insideUnitCircle.normalized;
-        }
+        randomDirection = Random.insideUnitCircle.normalized;
     }
+
+    // 🔒 Saldırı esnasında yön değiştirme
+    if (!animator.GetBool("isAttacking"))
+    {
+        if (finalDirection.x > 0)
+            transform.localScale = new Vector3(-1 * Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z); // Sağa bak
+        else if (finalDirection.x < 0)
+            transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z); // Sola bak
+    }
+}
+
+
 
     void AttackPlayer()
     {
