@@ -52,13 +52,22 @@ public class SpiderBoss : MonoBehaviour
     {
         if (isTeleporting) return;
 
-        if (!IsInAttackState()) return;
-
         targetPlayer = GetNearestPlayer();
-        if (targetPlayer == null) return;
+        if (targetPlayer == null)
+        {
+            SetAttackState(false);
+            return;
+        }
 
         float distance = Vector2.Distance(transform.position, targetPlayer.position);
-        if (distance <= detectionRange && Time.time >= lastAttackTime + attackCooldown)
+
+        // Range içinde mi kontrolü
+        bool inRange = distance <= detectionRange;
+        SetAttackState(inRange);
+
+        if (!inRange) return;
+
+        if (Time.time >= lastAttackTime + attackCooldown && IsInAttackState())
         {
             FaceTarget(targetPlayer.position);
             StartCoroutine(ShootBothHands());
@@ -71,16 +80,11 @@ public class SpiderBoss : MonoBehaviour
 
     IEnumerator ShootBothHands()
     {
-        if (animator != null)
-            animator.SetBool("isAttacking", true);
-
         foreach (Transform point in bulletSpawnPoints)
         {
             Shoot(targetPlayer.position, point);
             yield return new WaitForSeconds(fireIntervalBetweenHands);
         }
-
-        Invoke(nameof(ResetAttack), 0.2f);
     }
 
     void Shoot(Vector3 targetPos, Transform spawnPoint)
@@ -97,12 +101,6 @@ public class SpiderBoss : MonoBehaviour
             b.damage = attackDamage;
     }
 
-    void ResetAttack()
-    {
-        if (animator != null)
-            animator.SetBool("isAttacking", false);
-    }
-
     IEnumerator TeleportRoutine()
     {
         while (true)
@@ -117,11 +115,14 @@ public class SpiderBoss : MonoBehaviour
     {
         isTeleporting = true;
 
+        // Ateşi durdur, idle’a geçsin
+        SetAttackState(false);
+
         if (animator) animator.SetTrigger("TeleportOut");
         if (teleportVFX) Instantiate(teleportVFX, transform.position, Quaternion.identity);
         if (teleportSound) audioSource.PlayOneShot(teleportSound);
 
-        yield return new WaitForSeconds(1f); // teleport-out animasyon süresi
+        yield return new WaitForSeconds(1f);
 
         Transform newPos = teleportPoints[Random.Range(0, teleportPoints.Length)];
         transform.position = newPos.position;
@@ -129,9 +130,21 @@ public class SpiderBoss : MonoBehaviour
         if (teleportVFX) Instantiate(teleportVFX, transform.position, Quaternion.identity);
         if (animator) animator.SetTrigger("TeleportIn");
 
-        yield return new WaitForSeconds(1f); // teleport-in animasyon süresi
+        yield return new WaitForSeconds(1f);
 
         isTeleporting = false;
+    }
+
+    void SetAttackState(bool isAttacking)
+    {
+        if (animator != null)
+            animator.SetBool("isAttacking", isAttacking);
+    }
+
+    bool IsInAttackState()
+    {
+        if (animator == null) return false;
+        return animator.GetBool("isAttacking");
     }
 
     Transform GetNearestPlayer()
@@ -181,7 +194,7 @@ public class SpiderBoss : MonoBehaviour
     void Die()
     {
         if (deathSound) audioSource.PlayOneShot(deathSound);
-        // TODO: Buraya Level geçiş kodu yazılacak
+        // TODO: Level geçiş kodu buraya
         Destroy(gameObject);
     }
 
@@ -195,12 +208,5 @@ public class SpiderBoss : MonoBehaviour
 
             Destroy(other.gameObject);
         }
-    }
-
-    bool IsInAttackState()
-    {
-        if (animator == null) return false;
-        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
-        return stateInfo.IsName("SpiderBoss_attack") && !animator.IsInTransition(0);
     }
 }
