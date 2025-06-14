@@ -1,20 +1,12 @@
 fileFormatVersion: 2
-<<<<<<< HEAD:Assets/Ali/Animations/Bosses/Level1Boss_Spider/SpiderBoss_Teleport_Anim/SpiderBoss_Teleport_Anim_Frame_30.png.meta
 guid: a361a53e739930144b5bf16e1387d0e5
-=======
-guid: 0eead5eb7fe1c454781d6d55f841adc1
->>>>>>> 34762df04232b6252a03ba6bb0a9d7b2de47e366:Assets/ARDA/Level1Boss_Spider/SpiderBoss_Teleport_Anim/SpiderBoss_Teleport_Anim_Frame_30.png.meta
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
     mipMapMode: 0
-<<<<<<< HEAD:Assets/Ali/Animations/Bosses/Level1Boss_Spider/SpiderBoss_Teleport_Anim/SpiderBoss_Teleport_Anim_Frame_30.png.meta
     enableMipMap: 0
-=======
-    enableMipMap: 1
->>>>>>> 34762df04232b6252a03ba6bb0a9d7b2de47e366:Assets/ARDA/Level1Boss_Spider/SpiderBoss_Teleport_Anim/SpiderBoss_Teleport_Anim_Frame_30.png.meta
     sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
@@ -42,7 +34,6 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-<<<<<<< HEAD:Assets/Ali/Animations/Bosses/Level1Boss_Spider/SpiderBoss_Teleport_Anim/SpiderBoss_Teleport_Anim_Frame_30.png.meta
     filterMode: 0
     aniso: 1
     mipBias: 0
@@ -55,37 +46,15 @@ TextureImporter:
   spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
-  alignment: 9
-  spritePivot: {x: 0.4798387, y: 0.4634146}
-=======
-    filterMode: 1
-    aniso: 1
-    mipBias: 0
-    wrapU: 0
-    wrapV: 0
-    wrapW: 0
-  nPOTScale: 1
-  lightmap: 0
-  compressionQuality: 50
-  spriteMode: 0
-  spriteExtrude: 1
-  spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
->>>>>>> 34762df04232b6252a03ba6bb0a9d7b2de47e366:Assets/ARDA/Level1Boss_Spider/SpiderBoss_Teleport_Anim/SpiderBoss_Teleport_Anim_Frame_30.png.meta
   spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
-<<<<<<< HEAD:Assets/Ali/Animations/Bosses/Level1Boss_Spider/SpiderBoss_Teleport_Anim/SpiderBoss_Teleport_Anim_Frame_30.png.meta
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
   textureType: 8
-=======
-  alphaIsTransparency: 0
-  spriteTessellationDetail: -1
-  textureType: 0
->>>>>>> 34762df04232b6252a03ba6bb0a9d7b2de47e366:Assets/ARDA/Level1Boss_Spider/SpiderBoss_Teleport_Anim/SpiderBoss_Teleport_Anim_Frame_30.png.meta
   textureShape: 1
   singleChannelComponent: 0
   flipbookRows: 1
@@ -94,20 +63,16 @@ TextureImporter:
   compressionQualitySet: 0
   textureFormatSet: 0
   ignorePngGamma: 0
-  applyGammaDecoding: 0
+  applyGammaDecoding: 1
   swizzle: 50462976
-  cookieLightType: 0
+  cookieLightType: 2
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-<<<<<<< HEAD:Assets/Ali/Animations/Bosses/Level1Boss_Spider/SpiderBoss_Teleport_Anim/SpiderBoss_Teleport_Anim_Frame_30.png.meta
     textureCompression: 2
-=======
-    textureCompression: 1
->>>>>>> 34762df04232b6252a03ba6bb0a9d7b2de47e366:Assets/ARDA/Level1Boss_Spider/SpiderBoss_Teleport_Anim/SpiderBoss_Teleport_Anim_Frame_30.png.meta
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -120,7 +85,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -128,13 +93,12 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-<<<<<<< HEAD:Assets/Ali/Animations/Bosses/Level1Boss_Spider/SpiderBoss_Teleport_Anim/SpiderBoss_Teleport_Anim_Frame_30.png.meta
   - serializedVersion: 4
     buildTarget: Android
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -147,7 +111,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -155,8 +119,6 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-=======
->>>>>>> 34762df04232b6252a03ba6bb0a9d7b2de47e366:Assets/ARDA/Level1Boss_Spider/SpiderBoss_Teleport_Anim/SpiderBoss_Teleport_Anim_Frame_30.png.meta
   spriteSheet:
     serializedVersion: 2
     sprites: []
@@ -164,13 +126,8 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-<<<<<<< HEAD:Assets/Ali/Animations/Bosses/Level1Boss_Spider/SpiderBoss_Teleport_Anim/SpiderBoss_Teleport_Anim_Frame_30.png.meta
     spriteID: 5e97eb03825dee720800000000000000
-    internalID: 1537655665
-=======
-    spriteID: 
     internalID: 0
->>>>>>> 34762df04232b6252a03ba6bb0a9d7b2de47e366:Assets/ARDA/Level1Boss_Spider/SpiderBoss_Teleport_Anim/SpiderBoss_Teleport_Anim_Frame_30.png.meta
     vertices: []
     indices: 
     edges: []
