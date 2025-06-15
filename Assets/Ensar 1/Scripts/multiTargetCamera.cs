@@ -23,11 +23,19 @@ public class MultiTargetCamera : MonoBehaviour
 
     void LateUpdate()
     {
+        CleanNullTargets();
+
         if (targets == null || targets.Count == 0)
             return;
 
         Move();
         Zoom();
+    }
+
+    void CleanNullTargets()
+    {
+        // targets listesindeki null veya aktif olmayan nesneleri temizler
+        targets.RemoveAll(t => t == null || !t.gameObject.activeInHierarchy);
     }
 
     void Move()
@@ -50,6 +58,8 @@ public class MultiTargetCamera : MonoBehaviour
 
     float GetGreatestDistanceX()
     {
+        if (targets.Count == 1) return 0f;
+
         var bounds = new Bounds(targets[0].position, Vector3.zero);
         foreach (Transform target in targets)
         {
@@ -79,6 +89,7 @@ public class MultiTargetCamera : MonoBehaviour
         targets = newTargets;
     }
 }
+
 
 
 
