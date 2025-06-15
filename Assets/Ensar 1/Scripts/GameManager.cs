@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour
 {
@@ -43,7 +44,7 @@ public class GameManager : MonoBehaviour
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (scene.name == "GameScene")
+        if (scene.name == "Level2")
         {
             // Seçilen index'lere göre prefab'larý belirle
             if (player1Index >= 0 && player1Index < allCharacters.Length)
@@ -57,21 +58,24 @@ public class GameManager : MonoBehaviour
             if (player2SpawnPoint == null)
                 player2SpawnPoint = GameObject.Find("Player2SpawnPoint")?.transform;
 
-            // Karakterleri spawn et ve referanslarýný deðiþkenlere ata
+            // Karakterleri spawn et
             if (player1Prefab != null && player1SpawnPoint != null)
                 player1Instance = Instantiate(player1Prefab, player1SpawnPoint.position, Quaternion.identity);
             if (player2Prefab != null && player2SpawnPoint != null)
                 player2Instance = Instantiate(player2Prefab, player2SpawnPoint.position, Quaternion.identity);
 
-            CameraFollow camFollow = Camera.main.GetComponent<CameraFollow>();
-            if (camFollow != null)
+            // Kamera hedeflerini ayarla
+            MultiTargetCamera multiCam = Camera.main.GetComponent<MultiTargetCamera>();
+            if (multiCam != null)
             {
-                camFollow.target1 = player1Instance.transform;
-                camFollow.target2 = player2Instance.transform;
+                List<Transform> camTargets = new List<Transform> {
+                    player1Instance.transform,
+                    player2Instance.transform
+                };
+                multiCam.SetTargets(camTargets);
             }
-
-
         }
     }
 }
+    
 

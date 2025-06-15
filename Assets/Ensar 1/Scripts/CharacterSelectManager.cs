@@ -30,43 +30,48 @@ public class CharacterSelectManager : MonoBehaviour
 
     private void Update()
     {
-        if (player1Locked && player2Locked) return;
+        if (!player1Locked || !player2Locked)
+        {
+            if (Input.GetKeyDown(KeyCode.RightArrow))
+            {
+                currentIndex = (currentIndex + 1) % characterSprites.Length;
+                HighlightCurrent();
+            }
+            else if (Input.GetKeyDown(KeyCode.LeftArrow))
+            {
+                currentIndex = (currentIndex - 1 + characterSprites.Length) % characterSprites.Length;
+                HighlightCurrent();
+            }
 
-        if (Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            currentIndex = (currentIndex + 1) % characterSprites.Length;
-            HighlightCurrent();
+            if (Input.GetKeyDown(KeyCode.Return))
+            {
+                SelectCharacter(currentIndex);
+            }
         }
-        else if (Input.GetKeyDown(KeyCode.LeftArrow))
+        else
         {
-            currentIndex = (currentIndex - 1 + characterSprites.Length) % characterSprites.Length;
-            HighlightCurrent();
-        }
-
-        if (Input.GetKeyDown(KeyCode.Return)) // ENTER tuşu
-        {
-            SelectCharacter(currentIndex);
+            // Her iki oyuncu seçimini yaptıysa Enter ile StartGame çağrılabilir
+            if (Input.GetKeyDown(KeyCode.Return))
+            {
+                StartGame(); // StartGame fonksiyonunu çağır
+            }
         }
     }
 
     void HighlightCurrent()
-{
-    for (int i = 0; i < characterButtons.Length; i++)
     {
-        // Arka plandaki highlight paneli aç/kapat
-        highlightObjects[i].SetActive(i == currentIndex);
+        for (int i = 0; i < characterButtons.Length; i++)
+        {
+            highlightObjects[i].SetActive(i == currentIndex);
 
-        // Ek olarak seçilmiş karakterleri gri yap
-        if (i == player1Index || i == player2Index)
-            characterButtons[i].color = Color.gray;
-        else
-            characterButtons[i].color = Color.white;
+            if (i == player1Index || i == player2Index)
+                characterButtons[i].color = Color.gray;
+            else
+                characterButtons[i].color = Color.white;
 
-        // Hafif büyütme efekti
-        characterButtons[i].transform.localScale = (i == currentIndex) ? Vector3.one * 1.2f : Vector3.one;
+            characterButtons[i].transform.localScale = (i == currentIndex) ? Vector3.one * 1.2f : Vector3.one;
+        }
     }
-}
-
 
     void SelectCharacter(int index)
     {
@@ -99,7 +104,7 @@ public class CharacterSelectManager : MonoBehaviour
     {
         GameManager.Instance.player1Prefab = characterPrefabs[player1Index];
         GameManager.Instance.player2Prefab = characterPrefabs[player2Index];
-        SceneManager.LoadScene("GameScene");
+        SceneManager.LoadScene("Level2");
     }
 }
 
