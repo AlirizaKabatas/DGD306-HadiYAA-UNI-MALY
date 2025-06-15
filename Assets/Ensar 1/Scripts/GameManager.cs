@@ -8,9 +8,12 @@ public class GameManager : MonoBehaviour
     public GameObject player1Prefab;
     public GameObject player2Prefab;
 
-    public GameObject[] allCharacters; // 4 prefab
+    public GameObject[] allCharacters; // 4 karakter prefab'ý
     public int player1Index = -1;
     public int player2Index = -1;
+
+    public GameObject player1Instance;
+    public GameObject player2Instance;
 
     public Transform player1SpawnPoint;
     public Transform player2SpawnPoint;
@@ -42,15 +45,33 @@ public class GameManager : MonoBehaviour
     {
         if (scene.name == "GameScene")
         {
+            // Seçilen index'lere göre prefab'larý belirle
+            if (player1Index >= 0 && player1Index < allCharacters.Length)
+                player1Prefab = allCharacters[player1Index];
+            if (player2Index >= 0 && player2Index < allCharacters.Length)
+                player2Prefab = allCharacters[player2Index];
+
+            // Spawn noktalarýný bul
             if (player1SpawnPoint == null)
                 player1SpawnPoint = GameObject.Find("Player1SpawnPoint")?.transform;
             if (player2SpawnPoint == null)
                 player2SpawnPoint = GameObject.Find("Player2SpawnPoint")?.transform;
 
+            // Karakterleri spawn et ve referanslarýný deðiþkenlere ata
             if (player1Prefab != null && player1SpawnPoint != null)
-                Instantiate(player1Prefab, player1SpawnPoint.position, Quaternion.identity);
+                player1Instance = Instantiate(player1Prefab, player1SpawnPoint.position, Quaternion.identity);
             if (player2Prefab != null && player2SpawnPoint != null)
-                Instantiate(player2Prefab, player2SpawnPoint.position, Quaternion.identity);
+                player2Instance = Instantiate(player2Prefab, player2SpawnPoint.position, Quaternion.identity);
+
+            CameraFollow camFollow = Camera.main.GetComponent<CameraFollow>();
+            if (camFollow != null)
+            {
+                camFollow.target1 = player1Instance.transform;
+                camFollow.target2 = player2Instance.transform;
+            }
+
+
         }
     }
 }
+
