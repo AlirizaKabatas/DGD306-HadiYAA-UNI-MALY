@@ -882,8 +882,8 @@ MonoBehaviour:
       m_Calls: []
   m_ActionEvents: []
   m_NeverAutoSwitchControlSchemes: 1
-  m_DefaultControlScheme: Gamepad 1
-  m_DefaultActionMap: Player 1
+  m_DefaultControlScheme: Gamepad 2
+  m_DefaultActionMap: 18cbf11d-a65a-4dff-a47e-d083954ed542
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!1 &2938157717303278860
