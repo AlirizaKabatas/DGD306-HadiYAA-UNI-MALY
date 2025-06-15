@@ -1,5 +1,6 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour
 {
@@ -8,7 +9,7 @@ public class GameManager : MonoBehaviour
     public GameObject player1Prefab;
     public GameObject player2Prefab;
 
-    public GameObject[] allCharacters; // 4 karakter prefab'ý
+    public GameObject[] allCharacters; // 4 karakter prefab'Ä±
     public int player1Index = -1;
     public int player2Index = -1;
 
@@ -43,35 +44,89 @@ public class GameManager : MonoBehaviour
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (scene.name == "GameScene")
+        if (scene.name == "Level2")
         {
-            // Seçilen index'lere göre prefab'larý belirle
+            // SeÃ§ilen index'lere gÃ¶re prefab'larÄ± belirle
             if (player1Index >= 0 && player1Index < allCharacters.Length)
                 player1Prefab = allCharacters[player1Index];
             if (player2Index >= 0 && player2Index < allCharacters.Length)
                 player2Prefab = allCharacters[player2Index];
 
-            // Spawn noktalarýný bul
+            // Spawn noktalarÄ±nÄ± bul
             if (player1SpawnPoint == null)
                 player1SpawnPoint = GameObject.Find("Player1SpawnPoint")?.transform;
             if (player2SpawnPoint == null)
                 player2SpawnPoint = GameObject.Find("Player2SpawnPoint")?.transform;
 
-            // Karakterleri spawn et ve referanslarýný deðiþkenlere ata
+            // Karakterleri spawn et
             if (player1Prefab != null && player1SpawnPoint != null)
                 player1Instance = Instantiate(player1Prefab, player1SpawnPoint.position, Quaternion.identity);
             if (player2Prefab != null && player2SpawnPoint != null)
                 player2Instance = Instantiate(player2Prefab, player2SpawnPoint.position, Quaternion.identity);
 
-            CameraFollow camFollow = Camera.main.GetComponent<CameraFollow>();
-            if (camFollow != null)
+            // PLAYER 1 CANVAS AYARI
+            if (player1Instance != null)
             {
-                camFollow.target1 = player1Instance.transform;
-                camFollow.target2 = player2Instance.transform;
+                Transform canvas1 = player1Instance.transform.Find("Canvas1");
+                Transform canvas2 = player1Instance.transform.Find("Canvas2");
+
+                if (canvas1 != null) canvas1.gameObject.SetActive(true);
+                if (canvas2 != null) canvas2.gameObject.SetActive(false);
+            }
+
+            // PLAYER 2 CANVAS AYARI
+            if (player2Instance != null)
+            {
+                Transform canvas1 = player2Instance.transform.Find("Canvas1");
+                Transform canvas2 = player2Instance.transform.Find("Canvas2");
+
+                if (canvas1 != null) canvas1.gameObject.SetActive(false);
+                if (canvas2 != null) canvas2.gameObject.SetActive(true);
             }
 
 
+            // âœ¨ PLAYER 1: Movement & Shooting âœ¨
+            if (player1Instance != null)
+            {
+                var p1Move = player1Instance.GetComponent<Player1Movement>();
+                var p2Move = player1Instance.GetComponent<Player2Movement>();
+                var p1Shoot = player1Instance.GetComponent<Player1Shooting>();
+                var p2Shoot = player1Instance.GetComponent<Player2Shooting>();
+
+                if (p1Move != null) p1Move.enabled = true;
+                if (p2Move != null) p2Move.enabled = false;
+
+                if (p1Shoot != null) p1Shoot.enabled = true;
+                if (p2Shoot != null) p2Shoot.enabled = false;
+            }
+
+            // âœ¨ PLAYER 2: Movement & Shooting âœ¨
+            if (player2Instance != null)
+            {
+                var p1Move = player2Instance.GetComponent<Player1Movement>();
+                var p2Move = player2Instance.GetComponent<Player2Movement>();
+                var p1Shoot = player2Instance.GetComponent<Player1Shooting>();
+                var p2Shoot = player2Instance.GetComponent<Player2Shooting>();
+
+                if (p1Move != null) p1Move.enabled = false;
+                if (p2Move != null) p2Move.enabled = true;
+
+                if (p1Shoot != null) p1Shoot.enabled = false;
+                if (p2Shoot != null) p2Shoot.enabled = true;
+            }
+
+            // Kamera hedeflerini ayarla
+            MultiTargetCamera cam = Camera.main.GetComponent<MultiTargetCamera>();
+            if (cam != null)
+            {
+                cam.targets.Clear(); // Ã¶nceki hedefleri temizle
+                cam.targets.Add(player1Instance.transform);
+                cam.targets.Add(player2Instance.transform);
+            }
         }
     }
+
+
 }
+
 

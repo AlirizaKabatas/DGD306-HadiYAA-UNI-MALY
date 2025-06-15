@@ -4,7 +4,7 @@ using UnityEngine;
 [RequireComponent(typeof(Camera))]
 public class MultiTargetCamera : MonoBehaviour
 {
-    public List<Transform> targets;
+    public List<Transform> targets = new List<Transform>();
 
     public Vector3 offset;
     public float smoothTime = 0.5f;
@@ -23,7 +23,7 @@ public class MultiTargetCamera : MonoBehaviour
 
     void LateUpdate()
     {
-        if (targets.Count == 0)
+        if (targets == null || targets.Count == 0)
             return;
 
         Move();
@@ -34,6 +34,10 @@ public class MultiTargetCamera : MonoBehaviour
     {
         Vector3 centerPoint = GetCenterPoint();
         Vector3 newPosition = centerPoint + offset;
+
+        // Y eksenini sabit tutmak için burasý önemli
+        newPosition.y = transform.position.y;
+
         transform.position = Vector3.SmoothDamp(transform.position, newPosition, ref velocity, smoothTime);
     }
 
@@ -68,6 +72,13 @@ public class MultiTargetCamera : MonoBehaviour
 
         return bounds.center;
     }
+
+    // Dýþarýdan hedefler atanmasýný saðlar
+    public void SetTargets(List<Transform> newTargets)
+    {
+        targets = newTargets;
+    }
 }
+
 
 
