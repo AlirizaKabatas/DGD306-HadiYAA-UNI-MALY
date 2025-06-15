@@ -6,6 +6,7 @@ public class Movement2 : MonoBehaviour
     public float speed = 150f;
     public float jumpingPower = 280f;
     private bool isFacingRight = true;
+    private bool isSpeedZero = false; // C tuşu ile hızı sıfırlamak için
 
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheck;
@@ -17,18 +18,27 @@ public class Movement2 : MonoBehaviour
 
     void Start()
     {
-        // Legs objesinin Animator component'ini al
         lowerBodyAnimator = legs.GetComponent<Animator>();
     }
 
     void Update()
     {
-        horizontal = Input.GetAxisRaw("Horizontal");  // Yatay giriş
+        horizontal = Input.GetAxisRaw("Horizontal");
+
+        // C tuşuna basılıysa hız 0 olacak
+        isSpeedZero = Input.GetKey(KeyCode.C);
 
         // Alt vücut animasyonu
-        lowerBodyAnimator.SetFloat("Speed", Mathf.Abs(horizontal));
+        if (isSpeedZero)
+        {
+            lowerBodyAnimator.SetFloat("Speed", 0f); // Animasyonu durdur
+        }
+        else
+        {
+            lowerBodyAnimator.SetFloat("Speed", Mathf.Abs(horizontal)); // Hareket animasyonu
+        }
 
-        // Yön kontrolü (yalnızca basılı tutma veya bırakmaya göre yönlenir)
+        // Yön kontrolü
         if (horizontal < 0f && isFacingRight)
         {
             Flip();
@@ -53,8 +63,8 @@ public class Movement2 : MonoBehaviour
 
     void FixedUpdate()
     {
-        // Karakteri yatay eksende hareket ettir
-        rb.linearVelocity = new Vector2(horizontal * speed, rb.linearVelocity.y);
+        float moveSpeed = isSpeedZero ? 0f : horizontal * speed;
+        rb.linearVelocity = new Vector2(moveSpeed, rb.linearVelocity.y);
     }
 
     bool IsGrounded()
@@ -66,12 +76,12 @@ public class Movement2 : MonoBehaviour
     {
         isFacingRight = !isFacingRight;
 
-        // Ana karakter objesini ters çevir (bu legs'i de döndürür)
+        // Ana karakter objesini ters çevir
         Vector3 characterScale = transform.localScale;
         characterScale.x *= -1f;
         transform.localScale = characterScale;
 
-        // Üst vücut bağımsızsa, onu da çevir (örn: silah tutuyorsa falan)
+        // Üst vücut sprite'ını da çevir
         if (upperBodyRenderer != null)
         {
             Vector3 upperScale = upperBodyRenderer.transform.localScale;
@@ -79,7 +89,6 @@ public class Movement2 : MonoBehaviour
             upperBodyRenderer.transform.localScale = upperScale;
         }
 
-        // ❌ legs.transform.localScale'e DOKUNMA!
-        // çünkü legs zaten parent (karakter) ile birlikte döner.
+        // Legs'e dokunma (parent olduğu için otomatik döner)
     }
 }
