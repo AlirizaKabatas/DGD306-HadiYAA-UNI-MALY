@@ -12,16 +12,27 @@ public class Bullet : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
+        // Merminin çarptığı obje Enemy tag'ine sahip mi kontrol et
         if (other.CompareTag("Enemy"))
         {
-            // FlyingEnemy scriptini kontrol et
+            // DottopusBoss objesine hasar vermek için
+            DottopusBoss boss = other.GetComponent<DottopusBoss>();
+            if (boss != null)
+            {
+                Debug.Log("DottopusBoss'a hasar verildi!");
+                boss.TakeDamage(damage);  // Boss'a hasar ver
+            }
+
+            // FlyingEnemy objelerine hasar vermek için
             FlyingEnemy flyingEnemy = other.GetComponent<FlyingEnemy>();
             if (flyingEnemy != null)
             {
-                flyingEnemy.TakeDamage(damage);
+                Debug.Log("FlyingEnemy'ye hasar verildi!");
+                flyingEnemy.TakeDamage(damage);  // FlyingEnemy'e hasar ver
             }
 
-            Destroy(gameObject); // Mermiyi yok et
+            // Mermiyi yok et
+            Destroy(gameObject);
         }
     }
 

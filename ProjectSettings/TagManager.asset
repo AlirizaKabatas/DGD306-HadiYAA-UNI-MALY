@@ -59,6 +59,12 @@ TagManager:
   - name: Enemy
     uniqueID: 1515733951
     locked: 0
+  - name: BossLegs
+    uniqueID: 301729273
+    locked: 0
+  - name: Boss Face
+    uniqueID: 1223682761
+    locked: 0
   - name: PlayerLegs
     uniqueID: 500882241
     locked: 0
