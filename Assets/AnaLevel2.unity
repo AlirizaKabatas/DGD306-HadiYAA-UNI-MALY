@@ -5911,7 +5911,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3458216234194424394, guid: b149c553c2ed7e84bbc01b534c9ffa24, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 13.7
+      value: 2319
       objectReference: {fileID: 0}
     - target: {fileID: 3458216234194424394, guid: b149c553c2ed7e84bbc01b534c9ffa24, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -15391,6 +15391,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ffaa1244237727f42ae98103fba91ba1, type: 3}
+--- !u!224 &1989288680 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 3458216234194424394, guid: b149c553c2ed7e84bbc01b534c9ffa24, type: 3}
+  m_PrefabInstance: {fileID: 693139961}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1989721697
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16273,6 +16278,18 @@ PrefabInstance:
     - target: {fileID: 3443091778626121818, guid: 741a283f9d9fd5941a28d1b2c82d896c, type: 3}
       propertyPath: m_Name
       value: Main Camera (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5495218110933803451, guid: 741a283f9d9fd5941a28d1b2c82d896c, type: 3}
+      propertyPath: target1
+      value: 
+      objectReference: {fileID: 1989288680}
+    - target: {fileID: 5495218110933803451, guid: 741a283f9d9fd5941a28d1b2c82d896c, type: 3}
+      propertyPath: target2
+      value: 
+      objectReference: {fileID: 1989288680}
+    - target: {fileID: 5495218110933803451, guid: 741a283f9d9fd5941a28d1b2c82d896c, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6227133921439003092, guid: 741a283f9d9fd5941a28d1b2c82d896c, type: 3}
       propertyPath: maxZoom
