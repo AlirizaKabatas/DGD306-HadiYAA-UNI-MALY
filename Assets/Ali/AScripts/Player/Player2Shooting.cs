@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerShooting : MonoBehaviour
+public class Player2Shooting : MonoBehaviour
 {
     [Header("Mermi Ayarları")]
     public GameObject bulletPrefab;
@@ -62,7 +62,7 @@ public class PlayerShooting : MonoBehaviour
         Vector2 shootDirection = GetShootDirection();
         UpdateUpperBodySprite(shootDirection);
 
-        if (Input.GetMouseButton(0) && Time.time >= lastFireTime + (1f / fireRate))
+        if (Input.GetKey(KeyCode.I) && Time.time >= lastFireTime + (1f / fireRate))
         {
             if (shootDirection != Vector2.zero && currentAmmo > 0)
             {
@@ -75,7 +75,7 @@ public class PlayerShooting : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.R) && currentAmmo < magazineSize)
+        if (Input.GetKeyDown(KeyCode.P) && currentAmmo < magazineSize)
         {
             StartCoroutine(Reload());
         }
@@ -83,10 +83,10 @@ public class PlayerShooting : MonoBehaviour
 
     Vector2 GetShootDirection()
     {
-        bool up = Input.GetKey(KeyCode.W);
-        bool down = Input.GetKey(KeyCode.S);
-        bool left = Input.GetKey(KeyCode.A);
-        bool right = Input.GetKey(KeyCode.D);
+        bool up = Input.GetKey(KeyCode.UpArrow);
+        bool down = Input.GetKey(KeyCode.DownArrow);
+        bool left = Input.GetKey(KeyCode.LeftArrow);
+        bool right = Input.GetKey(KeyCode.RightArrow);
 
         if (right && up) return new Vector2(1, 1).normalized;
         if (right && down) return new Vector2(1, -1).normalized;

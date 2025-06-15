@@ -10,6 +10,7 @@ TagManager:
   - Bullet
   - Player2
   - EnemyBullet
+  - Heal
   layers:
   - Default
   - TransparentFX
