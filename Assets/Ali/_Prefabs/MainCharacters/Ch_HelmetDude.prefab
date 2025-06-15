@@ -711,7 +711,6 @@ MonoBehaviour:
   fireRate: 2
   magazineSize: 24
   reloadDuration: 2
-  autoReload: 1
   firePoints_Right:
   - {fileID: 7732019810435343760}
   - {fileID: 1862734681838522716}
@@ -730,15 +729,9 @@ MonoBehaviour:
   firePoints_LeftDown:
   - {fileID: 2499429801948012639}
   - {fileID: 3471714770776177778}
-  enableRecoil: 1
-  recoilForce: 1000
-  playerRb: {fileID: 1398449619628012371}
   muzzleFlashPrefab: {fileID: 0}
   shootSfx: {fileID: 0}
-  reloadSfx: {fileID: 0}
   audioSource: {fileID: 0}
-  ammoText: {fileID: 3531213099708887938}
-  reloadUI: {fileID: 5298091066769620753}
   upperBodyRenderer: {fileID: 5814855883931159513}
   spriteRight: {fileID: 21300000, guid: 46ed28eec57d7a1458da43d28a0332ab, type: 3}
   spriteRightUp: {fileID: 21300000, guid: f255b4f3a80c18449af7af6eee3b8fe3, type: 3}
@@ -746,6 +739,8 @@ MonoBehaviour:
   spriteLeft: {fileID: 21300000, guid: 487e27c1aa7281b4eae313990f816f0b, type: 3}
   spriteLeftUp: {fileID: 21300000, guid: 62fe6e3c632d7c041bdb216ead055c58, type: 3}
   spriteLeftDown: {fileID: 21300000, guid: f5da170f3dfa76743be1ff7406502b10, type: 3}
+  ammoText: {fileID: 3531213099708887938}
+  reloadImage: {fileID: 5298091066769620753}
 --- !u!114 &5750664287780850177
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -763,7 +758,6 @@ MonoBehaviour:
   fireRate: 5
   magazineSize: 24
   reloadDuration: 2
-  autoReload: 1
   firePoints_Right:
   - {fileID: 7732019810435343760}
   - {fileID: 1862734681838522716}
@@ -782,15 +776,9 @@ MonoBehaviour:
   firePoints_LeftDown:
   - {fileID: 2499429801948012639}
   - {fileID: 3471714770776177778}
-  enableRecoil: 1
-  recoilForce: 5
-  playerRb: {fileID: 1398449619628012371}
   muzzleFlashPrefab: {fileID: 0}
   shootSfx: {fileID: 0}
-  reloadSfx: {fileID: 0}
   audioSource: {fileID: 0}
-  ammoText: {fileID: 5678544801881973697}
-  reloadUI: {fileID: 8628795919459937374}
   upperBodyRenderer: {fileID: 5814855883931159513}
   spriteRight: {fileID: 21300000, guid: 46ed28eec57d7a1458da43d28a0332ab, type: 3}
   spriteRightUp: {fileID: 21300000, guid: f255b4f3a80c18449af7af6eee3b8fe3, type: 3}
@@ -798,6 +786,8 @@ MonoBehaviour:
   spriteLeft: {fileID: 21300000, guid: 487e27c1aa7281b4eae313990f816f0b, type: 3}
   spriteLeftUp: {fileID: 21300000, guid: 62fe6e3c632d7c041bdb216ead055c58, type: 3}
   spriteLeftDown: {fileID: 21300000, guid: f5da170f3dfa76743be1ff7406502b10, type: 3}
+  ammoText: {fileID: 5678544801881973697}
+  reloadImage: {fileID: 8628795919459937374}
 --- !u!114 &72622489951517780
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -812,6 +802,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 150
   jumpingPower: 280
+  variableJumpMultiplier: 0.5
   rb: {fileID: 1398449619628012371}
   groundCheck: {fileID: 1116375793956067996}
   groundLayer:
@@ -834,6 +825,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 150
   jumpingPower: 280
+  variableJumpMultiplier: 0.5
   rb: {fileID: 1398449619628012371}
   groundCheck: {fileID: 1116375793956067996}
   groundLayer:

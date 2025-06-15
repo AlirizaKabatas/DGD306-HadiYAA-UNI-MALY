@@ -1,12 +1,16 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Player2Movement : MonoBehaviour
 {
-    private float horizontal;
+    private Vector2 moveInput;
+    private bool stopPressed = false;
+
     public float speed = 150f;
     public float jumpingPower = 280f;
+    public float variableJumpMultiplier = 0.5f;
+    private bool isJumping = false;
     private bool isFacingRight = true;
-    private bool isSpeedZero = false;
 
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheck;
@@ -16,6 +20,60 @@ public class Player2Movement : MonoBehaviour
     [SerializeField] private GameObject legs;
     [SerializeField] private SpriteRenderer upperBodyRenderer;
 
+    private PlayerInput playerInput;
+
+    private void OnEnable()
+    {
+        playerInput = GetComponent<PlayerInput>();
+
+        // 🔁 Hareket bağlama
+        playerInput.actions["Move2"].performed += ctx => OnMove(ctx);
+        playerInput.actions["Move2"].canceled += ctx => OnMove(ctx);
+
+        // 🛑 Stop tuşu
+        playerInput.actions["Stop2"].performed += ctx => stopPressed = true;
+        playerInput.actions["Stop2"].canceled += ctx => stopPressed = false;
+
+        // 🦘 Zıplama
+        playerInput.actions["Jump2"].performed += OnJumpPressed;
+        playerInput.actions["Jump2"].canceled += OnJumpReleased;
+    }
+
+    private void OnDisable()
+    {
+        playerInput.actions["Move2"].performed -= ctx => OnMove(ctx);
+        playerInput.actions["Move2"].canceled -= ctx => OnMove(ctx);
+
+        playerInput.actions["Stop2"].performed -= ctx => stopPressed = true;
+        playerInput.actions["Stop2"].canceled -= ctx => stopPressed = false;
+
+        playerInput.actions["Jump2"].performed -= OnJumpPressed;
+        playerInput.actions["Jump2"].canceled -= OnJumpReleased;
+    }
+
+    private void OnMove(InputAction.CallbackContext ctx)
+    {
+        moveInput = ctx.ReadValue<Vector2>();
+    }
+
+    private void OnJumpPressed(InputAction.CallbackContext ctx)
+    {
+        if (IsGrounded())
+        {
+            isJumping = true;
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpingPower);
+        }
+    }
+
+    private void OnJumpReleased(InputAction.CallbackContext ctx)
+    {
+        if (isJumping && rb.linearVelocity.y > 0)
+        {
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, rb.linearVelocity.y * variableJumpMultiplier);
+        }
+        isJumping = false;
+    }
+
     void Start()
     {
         lowerBodyAnimator = legs.GetComponent<Animator>();
@@ -23,50 +81,17 @@ public class Player2Movement : MonoBehaviour
 
     void Update()
     {
-        // Yatay hareket tuşları: Sağ ve Sol ok tuşları
-        if (Input.GetKey(KeyCode.LeftArrow)) horizontal = -1f;
-        else if (Input.GetKey(KeyCode.RightArrow)) horizontal = 1f;
-        else horizontal = 0f;
+        // Animasyon
+        lowerBodyAnimator.SetFloat("Speed", stopPressed ? 0f : Mathf.Abs(moveInput.x));
 
-        // L tuşuna basılıysa hız sıfırlanacak
-        isSpeedZero = Input.GetKey(KeyCode.L);
-
-        // Alt vücut animasyonu
-        if (isSpeedZero)
-        {
-            lowerBodyAnimator.SetFloat("Speed", 0f);
-        }
-        else
-        {
-            lowerBodyAnimator.SetFloat("Speed", Mathf.Abs(horizontal));
-        }
-
-        // Yön çevirme
-        if (horizontal < 0f && isFacingRight)
-        {
-            Flip();
-        }
-        else if (horizontal > 0f && !isFacingRight)
-        {
-            Flip();
-        }
-
-        // Zıplama: . tuşu
-        if (Input.GetKeyDown(KeyCode.Period) && IsGrounded())
-        {
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpingPower);
-        }
-
-        // Zıplamayı erken bırakma
-        if (Input.GetKeyUp(KeyCode.Period) && rb.linearVelocity.y > 0f)
-        {
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, rb.linearVelocity.y * 0.5f);
-        }
+        // Yön değiştirme
+        if (moveInput.x < 0f && isFacingRight) Flip();
+        else if (moveInput.x > 0f && !isFacingRight) Flip();
     }
 
     void FixedUpdate()
     {
-        float moveSpeed = isSpeedZero ? 0f : horizontal * speed;
+        float moveSpeed = stopPressed ? 0f : moveInput.x * speed;
         rb.linearVelocity = new Vector2(moveSpeed, rb.linearVelocity.y);
     }
 
@@ -79,12 +104,10 @@ public class Player2Movement : MonoBehaviour
     {
         isFacingRight = !isFacingRight;
 
-        // Karakteri çevir
-        Vector3 characterScale = transform.localScale;
-        characterScale.x *= -1f;
-        transform.localScale = characterScale;
+        Vector3 scale = transform.localScale;
+        scale.x *= -1f;
+        transform.localScale = scale;
 
-        // Üst vücut sprite'ını da çevir
         if (upperBodyRenderer != null)
         {
             Vector3 upperScale = upperBodyRenderer.transform.localScale;

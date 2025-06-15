@@ -304,6 +304,7 @@ GameObject:
   - component: {fileID: 184554327256438301}
   - component: {fileID: 3786824363634306452}
   - component: {fileID: 5067751864328119295}
+  - component: {fileID: 1767026300612735356}
   m_Layer: 7
   m_Name: Ch_CapDude
   m_TagString: Player
@@ -335,7 +336,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -167.63089, y: 25.65202}
+  m_AnchoredPosition: {x: -1186.4, y: -1159.5}
   m_SizeDelta: {x: 63.3756, y: 81.613}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2158695419614940185
@@ -436,7 +437,6 @@ MonoBehaviour:
   fireRate: 20
   magazineSize: 24
   reloadDuration: 2
-  autoReload: 1
   firePoints_Right:
   - {fileID: 4332786122569607397}
   firePoints_RightUp:
@@ -449,15 +449,9 @@ MonoBehaviour:
   - {fileID: 8512738759375459435}
   firePoints_LeftDown:
   - {fileID: 24648581794769132}
-  enableRecoil: 0
-  recoilForce: 500
-  playerRb: {fileID: 8215128444017304449}
   muzzleFlashPrefab: {fileID: 0}
   shootSfx: {fileID: 0}
-  reloadSfx: {fileID: 0}
   audioSource: {fileID: 0}
-  ammoText: {fileID: 6101127572106013350}
-  reloadUI: {fileID: 3526593922214977581}
   upperBodyRenderer: {fileID: 6018278877019649121}
   spriteRight: {fileID: 21300000, guid: 7a898afb9f3b4fe43a9a6d185ebf7a6c, type: 3}
   spriteRightUp: {fileID: 21300000, guid: 8a911e7d368d8314a80793f6daa9ecbc, type: 3}
@@ -465,6 +459,8 @@ MonoBehaviour:
   spriteLeft: {fileID: 21300000, guid: 0a07317b8b2fc33478226d8a66c1c5b4, type: 3}
   spriteLeftUp: {fileID: 21300000, guid: c148309dbd646f24d83791a00dd3d803, type: 3}
   spriteLeftDown: {fileID: 21300000, guid: 0a8a8301f4350b141a34203d3224e5c6, type: 3}
+  ammoText: {fileID: 6101127572106013350}
+  reloadImage: {fileID: 3526593922214977581}
 --- !u!114 &533544502594903563
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -482,7 +478,6 @@ MonoBehaviour:
   fireRate: 5
   magazineSize: 24
   reloadDuration: 2
-  autoReload: 1
   firePoints_Right:
   - {fileID: 4332786122569607397}
   firePoints_RightUp:
@@ -495,15 +490,9 @@ MonoBehaviour:
   - {fileID: 8512738759375459435}
   firePoints_LeftDown:
   - {fileID: 24648581794769132}
-  enableRecoil: 0
-  recoilForce: 5
-  playerRb: {fileID: 8215128444017304449}
   muzzleFlashPrefab: {fileID: 0}
   shootSfx: {fileID: 0}
-  reloadSfx: {fileID: 0}
   audioSource: {fileID: 0}
-  ammoText: {fileID: 8875259965495955599}
-  reloadUI: {fileID: 1031281722061799370}
   upperBodyRenderer: {fileID: 6018278877019649121}
   spriteRight: {fileID: 21300000, guid: 7a898afb9f3b4fe43a9a6d185ebf7a6c, type: 3}
   spriteRightUp: {fileID: 21300000, guid: 8a911e7d368d8314a80793f6daa9ecbc, type: 3}
@@ -511,6 +500,8 @@ MonoBehaviour:
   spriteLeft: {fileID: 21300000, guid: 0a07317b8b2fc33478226d8a66c1c5b4, type: 3}
   spriteLeftUp: {fileID: 21300000, guid: c148309dbd646f24d83791a00dd3d803, type: 3}
   spriteLeftDown: {fileID: 21300000, guid: 0a8a8301f4350b141a34203d3224e5c6, type: 3}
+  ammoText: {fileID: 8875259965495955599}
+  reloadImage: {fileID: 1031281722061799370}
 --- !u!114 &184554327256438301
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -525,6 +516,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 150
   jumpingPower: 280
+  variableJumpMultiplier: 0.5
   rb: {fileID: 8215128444017304449}
   groundCheck: {fileID: 9217391708345587764}
   groundLayer:
@@ -547,6 +539,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 150
   jumpingPower: 280
+  variableJumpMultiplier: 0.5
   rb: {fileID: 8215128444017304449}
   groundCheck: {fileID: 9217391708345587764}
   groundLayer:
@@ -576,6 +569,36 @@ MonoBehaviour:
   renderers:
   - {fileID: 6018278877019649121}
   - {fileID: 4714746408823361590}
+--- !u!114 &1767026300612735356
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2177174862779849935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 1
+  m_DefaultControlScheme: Gamepad 1
+  m_DefaultActionMap: Player 1
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1 &2645616889688010108
 GameObject:
   m_ObjectHideFlags: 0

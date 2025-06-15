@@ -1,7 +1,7 @@
-// Player1Shooting.cs
+using UnityEngine;
+using UnityEngine.InputSystem;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using UnityEngine.UI;
 
 public class Player1Shooting : MonoBehaviour
@@ -12,12 +12,11 @@ public class Player1Shooting : MonoBehaviour
     public float fireRate = 5f;
     public int magazineSize = 24;
     public float reloadDuration = 2f;
-    public bool autoReload = true;
     private int currentAmmo;
     private float lastFireTime;
     private bool isReloading = false;
 
-    [Header("Fire Points (Açı Bazlı)")]
+    [Header("Fire Points (Yönlere Göre)")]
     public List<Transform> firePoints_Right;
     public List<Transform> firePoints_RightUp;
     public List<Transform> firePoints_RightDown;
@@ -25,20 +24,10 @@ public class Player1Shooting : MonoBehaviour
     public List<Transform> firePoints_LeftUp;
     public List<Transform> firePoints_LeftDown;
 
-    [Header("Geri Tepme")]
-    public bool enableRecoil = true;
-    public float recoilForce = 5f;
-    public Rigidbody2D playerRb;
-
     [Header("VFX & SFX")]
     public GameObject muzzleFlashPrefab;
     public AudioClip shootSfx;
-    public AudioClip reloadSfx;
     public AudioSource audioSource;
-
-    [Header("UI")]
-    public Text ammoText;
-    public GameObject reloadUI;
 
     [Header("Üst Vücut Sprite")]
     [SerializeField] private SpriteRenderer upperBodyRenderer;
@@ -49,11 +38,21 @@ public class Player1Shooting : MonoBehaviour
     [SerializeField] private Sprite spriteLeftUp;
     [SerializeField] private Sprite spriteLeftDown;
 
+    [Header("UI")]
+    public Text ammoText;            // Sürekli gözüken ammo yazısı (örn. 24/∞)
+    public GameObject reloadImage;   // Reload sırasında aktif olan UI Image
+
+    private PlayerInput playerInput;
+
     void Start()
     {
         currentAmmo = magazineSize;
-        UpdateAmmoUI();
-        if (reloadUI != null) reloadUI.SetActive(false);
+        playerInput = GetComponent<PlayerInput>();
+
+        UpdateAmmoText();
+
+        if (reloadImage != null)
+            reloadImage.SetActive(false);  // Reload resmi başta kapalı
     }
 
     void Update()
@@ -63,20 +62,20 @@ public class Player1Shooting : MonoBehaviour
         Vector2 shootDirection = GetShootDirection();
         UpdateUpperBodySprite(shootDirection);
 
-        if (Input.GetMouseButton(0) && Time.time >= lastFireTime + (1f / fireRate))
+        if (playerInput.actions["Fire1"].ReadValue<float>() > 0.1f && Time.time >= lastFireTime + (1f / fireRate))
         {
             if (shootDirection != Vector2.zero && currentAmmo > 0)
             {
                 StartCoroutine(ShootFromDirection(shootDirection));
                 lastFireTime = Time.time;
             }
-            else if (currentAmmo <= 0 && autoReload)
+            else if (currentAmmo <= 0)
             {
                 StartCoroutine(Reload());
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.R) && currentAmmo < magazineSize)
+        if (playerInput.actions["Reload"].triggered && currentAmmo < magazineSize)
         {
             StartCoroutine(Reload());
         }
@@ -84,17 +83,19 @@ public class Player1Shooting : MonoBehaviour
 
     Vector2 GetShootDirection()
     {
-        bool up = Input.GetKey(KeyCode.W);
-        bool down = Input.GetKey(KeyCode.S);
-        bool left = Input.GetKey(KeyCode.A);
-        bool right = Input.GetKey(KeyCode.D);
+        Vector2 input = playerInput.actions["Aim"].ReadValue<Vector2>();
 
-        if (right && up) return new Vector2(1, 1).normalized;
-        if (right && down) return new Vector2(1, -1).normalized;
-        if (left && up) return new Vector2(-1, 1).normalized;
-        if (left && down) return new Vector2(-1, -1).normalized;
-        if (right) return Vector2.right;
-        if (left) return Vector2.left;
+        if (input.magnitude < 0.3f)
+            return transform.localScale.x > 0 ? Vector2.right : Vector2.left;
+
+        input = input.normalized;
+
+        if (input.x > 0.5f && input.y > 0.5f) return new Vector2(1, 1).normalized;
+        if (input.x > 0.5f && input.y < -0.5f) return new Vector2(1, -1).normalized;
+        if (input.x < -0.5f && input.y > 0.5f) return new Vector2(-1, 1).normalized;
+        if (input.x < -0.5f && input.y < -0.5f) return new Vector2(-1, -1).normalized;
+        if (input.x > 0.5f) return Vector2.right;
+        if (input.x < -0.5f) return Vector2.left;
 
         return transform.localScale.x > 0 ? Vector2.right : Vector2.left;
     }
@@ -109,13 +110,8 @@ public class Player1Shooting : MonoBehaviour
 
             Shoot(direction, firePoint);
             currentAmmo--;
-            UpdateAmmoUI();
+            UpdateAmmoText();
             yield return new WaitForSeconds(0.03f);
-        }
-
-        if (currentAmmo <= 0 && autoReload)
-        {
-            StartCoroutine(Reload());
         }
     }
 
@@ -145,49 +141,36 @@ public class Player1Shooting : MonoBehaviour
 
         if (shootSfx != null && audioSource != null)
             audioSource.PlayOneShot(shootSfx);
-
-        ApplyRecoil(direction);
-    }
-
-    void ApplyRecoil(Vector2 direction)
-    {
-        if (!enableRecoil || playerRb == null) return;
-
-        Vector2 recoilDir = direction.x >= 0 ? Vector2.left : Vector2.right;
-        playerRb.AddForce(recoilDir * recoilForce, ForceMode2D.Impulse);
     }
 
     IEnumerator Reload()
     {
         isReloading = true;
 
-        if (reloadUI != null)
-            reloadUI.SetActive(true);
-
-        if (reloadSfx != null && audioSource != null)
-            audioSource.PlayOneShot(reloadSfx);
+        if (reloadImage != null)
+            reloadImage.SetActive(true); // Resmi göster
 
         yield return new WaitForSeconds(reloadDuration);
 
         currentAmmo = magazineSize;
-        UpdateAmmoUI();
+        UpdateAmmoText();
 
-        if (reloadUI != null)
-            reloadUI.SetActive(false);
+        if (reloadImage != null)
+            reloadImage.SetActive(false); // Reload bitti, resmi gizle
 
         isReloading = false;
     }
 
-    void UpdateAmmoUI()
+    void UpdateAmmoText()
     {
         if (ammoText != null)
-            ammoText.text = currentAmmo + "/" + "∞";
+        {
+            ammoText.text = currentAmmo + "/∞";
+        }
     }
 
     void UpdateUpperBodySprite(Vector2 direction)
     {
-        direction = direction.normalized;
-
         if (direction == new Vector2(1, 1).normalized) upperBodyRenderer.sprite = spriteRightUp;
         else if (direction == new Vector2(1, -1).normalized) upperBodyRenderer.sprite = spriteRightDown;
         else if (direction == new Vector2(-1, 1).normalized) upperBodyRenderer.sprite = spriteLeftUp;
