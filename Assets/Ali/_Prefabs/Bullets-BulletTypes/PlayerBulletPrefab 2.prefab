@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5150795482980661076}
   - component: {fileID: 1749130942654531341}
   m_Layer: 8
-  m_Name: PlayerBulletPrefab 1
+  m_Name: PlayerBulletPrefab 2
   m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31,7 +31,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1037.0786, y: -1154.2312, z: -0.096373625}
-  m_LocalScale: {x: 83.56706, y: 57.44674, z: 57.44674}
+  m_LocalScale: {x: 82.83808, y: 56.945618, z: 56.945618}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -80,7 +80,7 @@ SpriteRenderer:
   m_SortingLayerID: 1937162859
   m_SortingLayer: 1
   m_SortingOrder: 5
-  m_Sprite: {fileID: 21300000, guid: 4d8efadb2c3ff1248a8f8d832e3bca08, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2543f8c7818e0dd4d8f0a4bb1bf2f53f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -104,7 +104,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifetime: 4
-  damage: 1
+  damage: 2
 --- !u!61 &4477200898656948517
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -139,17 +139,17 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.000347442, y: 0.005512411}
+  m_Offset: {x: -0.0047359522, y: 0.00017009676}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.12, y: 0.11}
+    oldSize: {x: 0.29, y: 0.16}
     newSize: {x: 0.48, y: 0.16}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.041584544, y: 0.04074766}
+  m_Size: {x: 0.041584115, y: 0.042691566}
   m_EdgeRadius: 0
 --- !u!50 &5150795482980661076
 Rigidbody2D:

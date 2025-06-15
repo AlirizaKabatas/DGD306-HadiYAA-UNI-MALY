@@ -104,16 +104,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e20ed856b74e68e4291b6b231450dcef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 591
-  detectionRange: 880.3
+  maxHealth: 5
+  detectionRange: 200
   attackCooldown: 2
   bulletPrefab: {fileID: 4966080540756605111, guid: bb4bbde1d03102940b2224e3a484e5de, type: 3}
   bulletSpawnPoint: {fileID: 3417912068220190072}
-  attackDamage: 48
+  attackDamage: 20
   bulletSpeed: 50
   attackSound: {fileID: 0}
   deathSound: {fileID: 0}
-  flashDuration: 0.2
+  flashDuration: 0.3
   animator: {fileID: 5041108577724899130}
   fireAngle: 45
 --- !u!95 &5041108577724899130

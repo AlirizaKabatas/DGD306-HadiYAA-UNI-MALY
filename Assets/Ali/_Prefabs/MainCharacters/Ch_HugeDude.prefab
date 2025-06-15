@@ -1073,6 +1073,7 @@ GameObject:
   - component: {fileID: 8586111524361955665}
   - component: {fileID: 1817578968439478276}
   - component: {fileID: 3074830180415405457}
+  - component: {fileID: 5024820528349087702}
   m_Layer: 7
   m_Name: Ch_HugeDude
   m_TagString: Player
@@ -1195,16 +1196,16 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5629193043146675000}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 395e8c524bd57854d897059dbec1e503, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 6902165046443089589, guid: 103d201ceef055c41a51ff927ab9f37c, type: 3}
-  bulletSpeed: 1000
-  fireRate: 20
-  magazineSize: 500
-  reloadDuration: 2
+  bulletSpeed: 600
+  fireRate: 12
+  magazineSize: 80
+  reloadDuration: 6
   firePoints_Right:
   - {fileID: 1123061929925766854}
   firePoints_RightUp:
@@ -1236,16 +1237,16 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5629193043146675000}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 99be7b0d7c482084cb2e3a991d925977, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 6902165046443089589, guid: 103d201ceef055c41a51ff927ab9f37c, type: 3}
-  bulletSpeed: 10
-  fireRate: 5
-  magazineSize: 24
-  reloadDuration: 2
+  bulletSpeed: 600
+  fireRate: 12
+  magazineSize: 80
+  reloadDuration: 6
   firePoints_Right:
   - {fileID: 1123061929925766854}
   firePoints_RightUp:
@@ -1277,13 +1278,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5629193043146675000}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f5fab6bdfec2542e885be5e2ceeb554e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 150
-  jumpingPower: 280
+  speed: 100
+  jumpingPower: 220
   variableJumpMultiplier: 0.5
   rb: {fileID: 8042517861993647620}
   groundCheck: {fileID: 4842546148665993024}
@@ -1300,13 +1301,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5629193043146675000}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9ec8e9475efc0fa4cb3caca2c7404ed8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 150
-  jumpingPower: 280
+  speed: 100
+  jumpingPower: 220
   variableJumpMultiplier: 0.5
   rb: {fileID: 8042517861993647620}
   groundCheck: {fileID: 4842546148665993024}
@@ -1337,6 +1338,36 @@ MonoBehaviour:
   renderers:
   - {fileID: 3978952799528086493}
   - {fileID: 3325044789276321587}
+--- !u!114 &5024820528349087702
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5629193043146675000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 1
+  m_DefaultControlScheme: Gamepad 1
+  m_DefaultActionMap: Player 1
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1 &6599506521522410809
 GameObject:
   m_ObjectHideFlags: 0

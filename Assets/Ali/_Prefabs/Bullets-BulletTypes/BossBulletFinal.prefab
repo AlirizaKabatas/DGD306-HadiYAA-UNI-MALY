@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -5865655399980933288}
   - component: {fileID: -8767690220064634529}
   m_Layer: 0
-  m_Name: EnemyBulletPrefab 1
+  m_Name: BossBulletFinal
   m_TagString: EnemyBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -79,7 +79,7 @@ SpriteRenderer:
   m_SortingLayerID: 1937162859
   m_SortingLayer: 1
   m_SortingOrder: 5
-  m_Sprite: {fileID: 21300000, guid: 6cd5d03d5cffd5a4eaf2c8c6eae20f5e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6cc313799044f6a49a0c5ec3ef9109c3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -128,7 +128,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.12, y: 0.09}
+    oldSize: {x: 0.13, y: 0.08}
     newSize: {x: 0.48, y: 0.16}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -175,5 +175,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c9e438c2f6d58a4184ad7183cf2b9f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
-  lifeTime: 6
+  damage: 15
+  lifeTime: 10

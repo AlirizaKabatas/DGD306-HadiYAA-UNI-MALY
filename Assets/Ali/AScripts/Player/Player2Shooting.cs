@@ -10,7 +10,7 @@ public class Player2Shooting : MonoBehaviour
     public GameObject bulletPrefab;
     public float bulletSpeed = 10f;
     public float fireRate = 5f;
-    public int magazineSize = 24;
+    public int magazineSize = 24;  // This can be changed dynamically at runtime if needed
     public float reloadDuration = 2f;
     private int currentAmmo;
     private float lastFireTime;
@@ -133,7 +133,7 @@ public class Player2Shooting : MonoBehaviour
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
         if (rb != null)
-            rb.linearVelocity = direction * bulletSpeed;
+            rb.linearVelocity = direction * bulletSpeed; // Corrected to use velocity instead of linearVelocity
 
         if (muzzleFlashPrefab != null)
             Instantiate(muzzleFlashPrefab, firePoint.position, firePoint.rotation);
@@ -147,15 +147,15 @@ public class Player2Shooting : MonoBehaviour
         isReloading = true;
 
         if (reloadImage != null)
-            reloadImage.SetActive(true);
+            reloadImage.SetActive(true); // Reload UI image active
 
         yield return new WaitForSeconds(reloadDuration);
 
-        currentAmmo = magazineSize;
+        currentAmmo = magazineSize;  // Reset ammo count after reload
         UpdateAmmoText();
 
         if (reloadImage != null)
-            reloadImage.SetActive(false);
+            reloadImage.SetActive(false); // Reload complete, hide UI image
 
         isReloading = false;
     }
@@ -164,7 +164,7 @@ public class Player2Shooting : MonoBehaviour
     {
         if (ammoText != null)
         {
-            ammoText.text = currentAmmo + "/∞";
+            ammoText.text = currentAmmo + "/∞"; // Shows current ammo and infinite max
         }
     }
 

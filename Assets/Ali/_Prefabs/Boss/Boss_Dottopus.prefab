@@ -327,7 +327,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08ddb135cc2fbbf469371c9402fd44fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  laserPrefab: {fileID: 4966080540756605111, guid: bb4bbde1d03102940b2224e3a484e5de, type: 3}
+  laserPrefab: {fileID: 4966080540756605111, guid: e3fd35e2b92834c47b5eba5ad3fd4cf4, type: 3}
   laserSpawnPoints:
   - {fileID: 2056875846334680678}
   - {fileID: 3172862014161736169}
@@ -379,7 +379,7 @@ MonoBehaviour:
   aoeRandomSpawn: 1
   aoeRandomCount: 5
   aoeSound: {fileID: 0}
-  maxHealth: 337
+  maxHealth: 300
   currentHealth: 0
   allBodyAnimator: {fileID: 3627350784698429731}
   attackFaceAnimator: {fileID: 1732164835325878262}

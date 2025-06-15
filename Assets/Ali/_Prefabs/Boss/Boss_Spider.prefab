@@ -169,10 +169,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9d02ac5801de56428cb71ed3d7b35de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 500000
-  detectionRange: 4
-  attackCooldown: 1
-  bulletPrefab: {fileID: 4966080540756605111, guid: bb4bbde1d03102940b2224e3a484e5de, type: 3}
+  maxHealth: 200
+  detectionRange: 250
+  attackCooldown: 1.2
+  bulletPrefab: {fileID: 4966080540756605111, guid: 3f0103af3a54ab44cac9ab69e849f3c8, type: 3}
   bulletSpawnPoints:
   - {fileID: 9068485032296921876}
   - {fileID: 4223057857836356963}
@@ -189,8 +189,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  teleportMinTime: 2
-  teleportMaxTime: 4
+  teleportMinTime: 7
+  teleportMaxTime: 10
 --- !u!95 &1853741527809740769
 Animator:
   serializedVersion: 7

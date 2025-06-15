@@ -10,9 +10,11 @@ public class Player1Shooting : MonoBehaviour
     public GameObject bulletPrefab;
     public float bulletSpeed = 10f;
     public float fireRate = 5f;
-    public int magazineSize = 24;
-    public float reloadDuration = 2f;
+
+    [Header("Magazin Ayarları")]
+    public int magazineSize = 24; // Buradaki 24 değeri sabit olacak.
     private int currentAmmo;
+    public float reloadDuration = 2f;
     private float lastFireTime;
     private bool isReloading = false;
 
@@ -46,7 +48,7 @@ public class Player1Shooting : MonoBehaviour
 
     void Start()
     {
-        currentAmmo = magazineSize;
+        currentAmmo = magazineSize; // Başlangıçta magazine size'ını 24 olarak belirle
         playerInput = GetComponent<PlayerInput>();
 
         UpdateAmmoText();
@@ -152,7 +154,7 @@ public class Player1Shooting : MonoBehaviour
 
         yield return new WaitForSeconds(reloadDuration);
 
-        currentAmmo = magazineSize;
+        currentAmmo = magazineSize; // Reload sırasında magazine yeniden 24'e ayarlanır
         UpdateAmmoText();
 
         if (reloadImage != null)
