@@ -2,15 +2,12 @@
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 
-public class GameManager : MonoBehaviour
+public class GameManager1 : MonoBehaviour
 {
-    public static GameManager Instance;
+    public static GameManager1 Instance;
 
     public GameObject player1Prefab;
     public GameObject player2Prefab;
-
-    public GameObject gameOverImage;
-
 
     public GameObject[] allCharacters; // 4 karakter prefab'ı
     public int player1Index = -1;
@@ -50,16 +47,8 @@ public class GameManager : MonoBehaviour
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        // ✅ Sahne adı her durumda kaydediliyor
-        currentSceneName = scene.name;
-
-        if (scene.name == "AnaLevel1")
+        if (scene.name == "Level2")
         {
-
-           
-            if (gameOverImage != null)
-                gameOverImage.SetActive(false); // sahne yüklendiğinde gizli olsun
-
             // Seçilen index'lere göre prefab'ları belirle
             if (player1Index >= 0 && player1Index < allCharacters.Length)
                 player1Prefab = allCharacters[player1Index];
@@ -132,12 +121,14 @@ public class GameManager : MonoBehaviour
             MultiTargetCamera cam = Camera.main.GetComponent<MultiTargetCamera>();
             if (cam != null)
             {
-                cam.targets.Clear();
+                cam.targets.Clear(); // önceki hedefleri temizle
                 cam.targets.Add(player1Instance.transform);
                 cam.targets.Add(player2Instance.transform);
             }
 
-            deadPlayerCount = 0; // yeniden say
+            // 🎯 Ölüm sayacı sıfırlansın ve sahne adı kaydedilsin
+            deadPlayerCount = 0;
+            currentSceneName = scene.name;
         }
     }
 
@@ -148,27 +139,13 @@ public class GameManager : MonoBehaviour
 
         if (deadPlayerCount >= 2)
         {
-            if (gameOverImage != null)
-            {
-                gameOverImage.SetActive(true);
-            }
-
-            Invoke(nameof(RestartScene), 4f); // resmi gösterdikten sonra 2 saniye bekleyip restart
+            Invoke(nameof(RestartScene), 1f); // 1 saniye sonra restart
         }
     }
 
-
     void RestartScene()
     {
-        if (!string.IsNullOrEmpty(currentSceneName))
-        {
-            SceneManager.LoadScene(currentSceneName);
-        }
-        else
-        {
-            // Güvenlik için fallback
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        }
+        SceneManager.LoadScene(currentSceneName);
     }
 }
 

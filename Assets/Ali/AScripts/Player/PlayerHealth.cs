@@ -50,7 +50,8 @@ public class PlayerHealth : MonoBehaviour
         isDead = true;
         if (audioSource && deathSound) audioSource.PlayOneShot(deathSound);
         gameObject.SetActive(false);  // Oyundan yok olur
-        MainGameManager.CheckAllPlayers(); // Her ölümde kontrol
+        GameManager.Instance.PlayerDied();
+        
     }
 
     void OnTriggerEnter2D(Collider2D collision)

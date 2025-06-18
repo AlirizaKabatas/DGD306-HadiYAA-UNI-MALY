@@ -20,17 +20,19 @@ public class MultiTargetCamera : MonoBehaviour
     {
         cam = GetComponent<Camera>();
     }
-
     void LateUpdate()
     {
-        CleanNullTargets();
+        CleanNullTargets(); // null veya disable objeleri listeden sil
 
         if (targets == null || targets.Count == 0)
-            return;
+            return; // takip edecek bir þey yoksa çýk
 
         Move();
         Zoom();
     }
+
+
+
 
     void CleanNullTargets()
     {

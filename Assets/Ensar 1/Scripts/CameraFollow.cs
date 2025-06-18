@@ -7,39 +7,49 @@ public class CameraFollow : MonoBehaviour
 
     public float smoothTime = 0.2f;
     public Vector3 offset = new Vector3(0, 0, -10);
-    public Vector2 deadZone = new Vector2(0.5f, 0.5f); // Küçük hareketleri yoksay
+    public Vector2 deadZone = new Vector2(0.5f, 0.5f);
 
     private Vector3 velocity;
-    private Camera cam;
-
-    void Start()
-    {
-        cam = GetComponent<Camera>();
-    }
 
     void LateUpdate()
     {
-        if (target1 == null || target2 == null)
+        // GameManager varsa ve playerlar sahnedeyse güncelle
+        if (GameManager.Instance != null)
         {
-            if (GameManager.Instance != null)
-            {
-                if (GameManager.Instance.player1Instance != null)
-                    target1 = GameManager.Instance.player1Instance.transform;
-                if (GameManager.Instance.player2Instance != null)
-                    target2 = GameManager.Instance.player2Instance.transform;
-            }
-            return;
+            if (GameManager.Instance.player1Instance != null)
+                target1 = GameManager.Instance.player1Instance.transform;
+            else
+                target1 = null;
+
+            if (GameManager.Instance.player2Instance != null)
+                target2 = GameManager.Instance.player2Instance.transform;
+            else
+                target2 = null;
         }
 
-        Move();
-    }
+        // Hiç oyuncu yoksa hareket etme
+        if (target1 == null && target2 == null)
+            return;
 
-    void Move()
-    {
-        Vector3 centerPoint = (target1.position + target2.position) / 2f;
-        Vector3 desiredPosition = centerPoint + offset;
+        Vector3 desiredPosition;
 
-        // Dead zone: çok küçük hareketlerde kamera yer deðiþtirme
+        // Ýki oyuncu hayattaysa ortasýný bul
+        if (target1 != null && target2 != null)
+        {
+            Vector3 center = (target1.position + target2.position) / 2f;
+            desiredPosition = center + offset;
+        }
+        // Sadece biri hayattaysa onu takip et
+        else if (target1 != null)
+        {
+            desiredPosition = target1.position + offset;
+        }
+        else // sadece target2 != null
+        {
+            desiredPosition = target2.position + offset;
+        }
+
+        // Dead zone kontrolü
         Vector3 delta = desiredPosition - transform.position;
         if (Mathf.Abs(delta.x) < deadZone.x && Mathf.Abs(delta.y) < deadZone.y)
             return;
@@ -47,4 +57,6 @@ public class CameraFollow : MonoBehaviour
         transform.position = Vector3.SmoothDamp(transform.position, desiredPosition, ref velocity, smoothTime);
     }
 }
+
+
 

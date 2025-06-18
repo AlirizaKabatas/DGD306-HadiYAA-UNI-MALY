@@ -43,6 +43,12 @@ public class DottopusBoss : MonoBehaviour
     public Animator allBodyAnimator;
     public Animator attackFaceAnimator;
 
+    [Header("Portal Settings")]
+    public GameObject portalPrefab; // Portal prefabý
+    public Transform portalSpawnPoint;
+
+    public AudioClip deathSound;
+
     private AudioSource audioSource;
 
     void Start()
@@ -154,6 +160,14 @@ public class DottopusBoss : MonoBehaviour
 
     void Die()
     {
+        if (deathSound) audioSource.PlayOneShot(deathSound);
+
+        // PORTAL SPAWN
+        if (portalPrefab != null && portalSpawnPoint != null)
+        {
+            Instantiate(portalPrefab, portalSpawnPoint.position, Quaternion.identity);
+            Debug.Log("Portal spawnlandý."); // TEST için
+        }
         Destroy(gameObject);
         GameObject healthBarObject = GameObject.Find("DottopusHealthBar");
         if (healthBarObject != null)

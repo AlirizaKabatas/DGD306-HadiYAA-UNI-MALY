@@ -20,6 +20,10 @@ public class SpiderBoss : MonoBehaviour
     public Animator animator;
     public GameObject teleportVFX;
 
+    [Header("Portal Settings")]
+    public GameObject portalPrefab; // Portal prefabı
+    public Transform portalSpawnPoint; // Portal nereye çıkacak
+
     [Header("Teleport Settings")]
     public Transform[] teleportPoints;
     public float teleportMinTime = 8f;
@@ -194,9 +198,21 @@ public class SpiderBoss : MonoBehaviour
     void Die()
     {
         if (deathSound) audioSource.PlayOneShot(deathSound);
-        // TODO: Level geçiş kodu buraya
+
+        // PORTAL SPAWN
+        if (portalPrefab != null && portalSpawnPoint != null)
+        {
+            Instantiate(portalPrefab, portalSpawnPoint.position, Quaternion.identity);
+            Debug.Log("Portal spawnlandı."); // TEST için
+        }
+        else
+        {
+            Debug.LogWarning("Portal prefab veya spawn point eksik!");
+        }
+
         Destroy(gameObject);
     }
+
 
     void OnTriggerEnter2D(Collider2D other)
     {
