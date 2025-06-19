@@ -13,6 +13,11 @@ public class SpiderBoss : MonoBehaviour
     public int attackDamage = 15;
     public float bulletSpeed = 8f;
     public float fireIntervalBetweenHands = 0.3f;
+    [Header("Audio Sources")]
+public AudioSource attackAudioSource;  // Ateş sesi
+public AudioSource teleportAudioSource;  // Teleport sesi
+public AudioSource deathAudioSource;  // Ölüm sesi
+
     public AudioClip attackSound;
     public AudioClip deathSound;
     public AudioClip teleportSound;
@@ -50,6 +55,7 @@ public class SpiderBoss : MonoBehaviour
             audioSource = gameObject.AddComponent<AudioSource>();
 
         StartCoroutine(TeleportRoutine());
+        
     }
 
     void Update()
@@ -88,6 +94,8 @@ public class SpiderBoss : MonoBehaviour
         {
             Shoot(targetPlayer.position, point);
             yield return new WaitForSeconds(fireIntervalBetweenHands);
+            if (attackSound && attackAudioSource)
+    attackAudioSource.PlayOneShot(attackSound);  // Ateş sesi çal
         }
     }
 
@@ -133,6 +141,8 @@ public class SpiderBoss : MonoBehaviour
 
         if (teleportVFX) Instantiate(teleportVFX, transform.position, Quaternion.identity);
         if (animator) animator.SetTrigger("TeleportIn");
+        if (teleportSound && teleportAudioSource)
+    teleportAudioSource.PlayOneShot(teleportSound);  // Teleport sesi çal
 
         yield return new WaitForSeconds(1f);
 
@@ -209,6 +219,8 @@ public class SpiderBoss : MonoBehaviour
         {
             Debug.LogWarning("Portal prefab veya spawn point eksik!");
         }
+        if (deathSound && deathAudioSource)
+    deathAudioSource.PlayOneShot(deathSound);  // Ölüm sesi çal
 
         Destroy(gameObject);
     }

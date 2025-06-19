@@ -18,6 +18,10 @@ public class SlimeEnemy : MonoBehaviour
     public AudioSource idleAudio;
     public AudioSource attackAudio;
     public AudioSource deathAudio;
+    [SerializeField] private AudioSource audioSource;
+[SerializeField] private AudioClip deathClip;
+[SerializeField] private AudioClip attackClip;
+
 
     private int currentHealth;
     private float timeSinceLastAttack;
@@ -26,7 +30,6 @@ public class SlimeEnemy : MonoBehaviour
     private Color originalColor;
     private Animator animator;
     private Transform targetPlayer;
-
     private float fixedY; // 🆕 Y pozisyonunu sabitlemek için
 
     void Start()
@@ -131,13 +134,20 @@ public class SlimeEnemy : MonoBehaviour
         }
     }
 
-    void Die()
+   void Die()
+{
+    if (deathAudio != null && deathAudio.clip != null)
     {
-        if (deathAudio != null)
-            deathAudio.Play();
-
-        Destroy(gameObject, 0.1f);
+        deathAudio.Play();
+        Destroy(gameObject, deathAudio.clip.length);
     }
+    else
+    {
+        Destroy(gameObject);
+    }
+}
+
+
 
     void OnTriggerEnter2D(Collider2D other)
     {

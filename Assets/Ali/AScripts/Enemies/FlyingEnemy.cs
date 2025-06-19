@@ -21,6 +21,9 @@ public class FlyingEnemy : MonoBehaviour
     private Color originalColor;
     private bool playerDetected = false;
     private Animator animator;
+    [SerializeField] private AudioClip deathSound;
+[SerializeField] private AudioSource audioSource;
+
 
     void Start()
     {
@@ -125,6 +128,9 @@ public class FlyingEnemy : MonoBehaviour
 
     void Die()
     {
+        if (audioSource && deathSound)
+    audioSource.PlayOneShot(deathSound);
+
         Debug.Log("FlyingEnemy öldü!");
         Destroy(gameObject);
     }

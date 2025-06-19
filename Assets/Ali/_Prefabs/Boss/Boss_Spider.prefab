@@ -180,9 +180,9 @@ MonoBehaviour:
   attackDamage: 15
   bulletSpeed: 20
   fireIntervalBetweenHands: 0.3
-  attackSound: {fileID: 0}
+  attackSound: {fileID: 8300000, guid: 9d78153cffad29e459431a23a9a566a3, type: 3}
   deathSound: {fileID: 0}
-  teleportSound: {fileID: 0}
+  teleportSound: {fileID: 8300000, guid: 1b5f1b5733a943b47a8a05cf682d2b68, type: 3}
   flashDuration: 0.2
   animator: {fileID: 1853741527809740769}
   teleportVFX: {fileID: 0}

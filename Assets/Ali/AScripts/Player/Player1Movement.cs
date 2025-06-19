@@ -12,6 +12,9 @@ public class Player1Movement : MonoBehaviour
     private bool isJumping = false;
     private bool isFacingRight = true;
 
+[SerializeField] private AudioSource audioSource;
+[SerializeField] private AudioClip jumpSound;
+
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
@@ -46,14 +49,20 @@ public class Player1Movement : MonoBehaviour
         moveInput = value.Get<Vector2>();
     }
 
-    private void OnJumpPressed(InputAction.CallbackContext ctx)
+   private void OnJumpPressed(InputAction.CallbackContext ctx)
+{
+    if (IsGrounded())
     {
-        if (IsGrounded())
+        isJumping = true;
+        rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpingPower);
+
+        if (audioSource != null && jumpSound != null)
         {
-            isJumping = true;
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpingPower);
+            audioSource.PlayOneShot(jumpSound);
         }
     }
+}
+
 
     private void OnJumpReleased(InputAction.CallbackContext ctx)
     {

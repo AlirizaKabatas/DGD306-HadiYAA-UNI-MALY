@@ -15,6 +15,7 @@ public class RangedEnemy : MonoBehaviour
     public AudioClip deathSound;
     public float flashDuration = 0.2f;
     public Animator animator;
+    
 
 
     [Header("Shooting Settings")]
@@ -25,7 +26,7 @@ public class RangedEnemy : MonoBehaviour
     private float lastAttackTime;
     private SpriteRenderer spriteRenderer;
     private Color originalColor;
-    private AudioSource audioSource;
+    [SerializeField] private AudioSource audioSource;
     private Transform targetPlayer;
     private Vector3 originalScale;
 
@@ -167,12 +168,18 @@ public class RangedEnemy : MonoBehaviour
     }
 
     void Die()
+{
+    if (deathSound && audioSource)
     {
-        if (deathSound)
-            audioSource.PlayOneShot(deathSound);
-
+        audioSource.PlayOneShot(deathSound);
+        Destroy(gameObject, deathSound.length); // 🎧 Ses kadar bekle sonra yok et
+    }
+    else
+    {
         Destroy(gameObject);
     }
+}
+
 
     void OnTriggerEnter2D(Collider2D other)
     {
