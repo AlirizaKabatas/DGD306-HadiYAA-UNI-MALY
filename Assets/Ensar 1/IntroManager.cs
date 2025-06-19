@@ -5,16 +5,24 @@ using UnityEngine.Video;
 public class IntroManager : MonoBehaviour
 {
     public VideoPlayer videoPlayer;
-    public string nextSceneName = "CharacterSelect"; // Geçiþ yapýlacak sahne
+    public string nextSceneName = "CharacterSelect"; // Hedef sahne
 
     void Start()
     {
-        videoPlayer.loopPointReached += OnVideoEnd; // Video bittiðinde tetiklenir
+        if (videoPlayer == null)
+        {
+            Debug.LogError("VideoPlayer baðlý deðil!");
+            return;
+        }
+
+        videoPlayer.loopPointReached += OnVideoEnd;
+        videoPlayer.Play(); // Opsiyonel: Otomatik baþlatmazsa
     }
 
     void OnVideoEnd(VideoPlayer vp)
     {
-        SceneManager.LoadScene(nextSceneName); // Karakter seçimine geç
+        SceneManager.LoadScene(nextSceneName);
     }
 }
+
 
