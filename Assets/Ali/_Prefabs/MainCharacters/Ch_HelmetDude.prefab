@@ -756,7 +756,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 6902165046443089589, guid: 3eb2dca6cfe278046b2b3d4779af318e, type: 3}
   bulletSpeed: 400
-  fireRate: 1.5
+  fireRate: 3.8
   magazineSize: 18
   reloadDuration: 1.25
   firePoints_Right:
@@ -860,6 +860,7 @@ MonoBehaviour:
   renderers:
   - {fileID: 5814855883931159513}
   - {fileID: 7477898383915586140}
+  audioSource: {fileID: 0}
 --- !u!114 &-2113411330004420642
 MonoBehaviour:
   m_ObjectHideFlags: 0
