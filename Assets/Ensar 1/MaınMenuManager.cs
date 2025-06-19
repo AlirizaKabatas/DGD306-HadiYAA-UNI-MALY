@@ -5,7 +5,13 @@ public class MainMenuManager : MonoBehaviour
 {
     public string introSceneName = "IntroScene"; // Intro sahnesinin ismini buraya yaz
     public string optionsSceneName = "OptionsScene"; // Yeni sahne
+
+    public string creditsSceneName = "CreditsScene"; // Yeni sahne
+
+    public string mainMenuSceneName = "MainMenu"; // Ana menü sahne ismi
     public AudioSource clickSound; // Buton sesi varsa
+
+    
 
     public void OnPlayPressed()
     {
@@ -22,6 +28,21 @@ public class MainMenuManager : MonoBehaviour
 
         SceneManager.LoadScene(optionsSceneName);
     }
+     public void OnCreditsPressed()
+    {
+        if (clickSound != null)
+            clickSound.Play();
+
+        SceneManager.LoadScene(creditsSceneName);
+    }
+    public void OnBackToMenuPressed()
+    {
+        if (clickSound != null)
+            clickSound.Play();
+
+        SceneManager.LoadScene(mainMenuSceneName);
+    }
+
 
     public void OnQuitPressed()
     {
