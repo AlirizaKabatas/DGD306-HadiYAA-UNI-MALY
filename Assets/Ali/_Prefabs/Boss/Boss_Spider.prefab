@@ -78,6 +78,7 @@ GameObject:
   - component: {fileID: 2951674861363672093}
   - component: {fileID: 4680000814713246682}
   - component: {fileID: 7371692836543069083}
+  - component: {fileID: 3344214739209750460}
   m_Layer: 6
   m_Name: Boss_Spider
   m_TagString: Enemy
@@ -185,12 +186,15 @@ MonoBehaviour:
   flashDuration: 0.2
   animator: {fileID: 1853741527809740769}
   teleportVFX: {fileID: 0}
+  portalPrefab: {fileID: 0}
+  portalSpawnPoint: {fileID: 0}
   teleportPoints:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   teleportMinTime: 7
   teleportMaxTime: 10
+  currentHealth: 0
 --- !u!95 &1853741527809740769
 Animator:
   serializedVersion: 7
@@ -429,3 +433,16 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.30537617, y: 0.30658913}
   m_EdgeRadius: 0
+--- !u!114 &3344214739209750460
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7749142866127108372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afd5c11d324db7842a99e8dfcc8cca1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthBarImage: {fileID: 0}

@@ -11482,6 +11482,74 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3938125448385576548, guid: ffaa1244237727f42ae98103fba91ba1, type: 3}
   m_PrefabInstance: {fileID: 557582947}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &558381130
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2550331879025578216, guid: ba402c10816f21047b061b45019503d8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -3279.3928
+      objectReference: {fileID: 0}
+    - target: {fileID: 2550331879025578216, guid: ba402c10816f21047b061b45019503d8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -2878.3694
+      objectReference: {fileID: 0}
+    - target: {fileID: 2550331879025578216, guid: ba402c10816f21047b061b45019503d8, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2.6733005
+      objectReference: {fileID: 0}
+    - target: {fileID: 2550331879025578216, guid: ba402c10816f21047b061b45019503d8, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2550331879025578216, guid: ba402c10816f21047b061b45019503d8, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2550331879025578216, guid: ba402c10816f21047b061b45019503d8, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2550331879025578216, guid: ba402c10816f21047b061b45019503d8, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2550331879025578216, guid: ba402c10816f21047b061b45019503d8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2550331879025578216, guid: ba402c10816f21047b061b45019503d8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2550331879025578216, guid: ba402c10816f21047b061b45019503d8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4663294201456151786, guid: ba402c10816f21047b061b45019503d8, type: 3}
+      propertyPath: m_Name
+      value: BossHealthBar
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ba402c10816f21047b061b45019503d8, type: 3}
+--- !u!114 &558381131 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1174330124348741116, guid: ba402c10816f21047b061b45019503d8, type: 3}
+  m_PrefabInstance: {fileID: 558381130}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &561240758
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -36862,6 +36930,10 @@ PrefabInstance:
       propertyPath: 'teleportPoints.Array.data[10]'
       value: 
       objectReference: {fileID: 1945842713}
+    - target: {fileID: 3344214739209750460, guid: 783e760093480a24e9b99bb005081c97, type: 3}
+      propertyPath: healthBarImage
+      value: 
+      objectReference: {fileID: 558381131}
     - target: {fileID: 7749142866127108372, guid: 783e760093480a24e9b99bb005081c97, type: 3}
       propertyPath: m_Name
       value: Boss_Spider
@@ -41390,3 +41462,4 @@ SceneRoots:
   - {fileID: 1065378386}
   - {fileID: 1837899904}
   - {fileID: 1348268231}
+  - {fileID: 558381130}

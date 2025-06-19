@@ -29,7 +29,7 @@ public class SpiderBoss : MonoBehaviour
     public float teleportMinTime = 8f;
     public float teleportMaxTime = 15f;
 
-    private int currentHealth;
+    public int currentHealth;
     private float lastAttackTime;
     private SpriteRenderer spriteRenderer;
     private Color originalColor;
