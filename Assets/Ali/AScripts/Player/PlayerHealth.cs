@@ -15,7 +15,7 @@ public class PlayerHealth : MonoBehaviour
 
     private int currentHealth;
     private bool isDead = false;
-   
+
     [SerializeField] private AudioSource audioSource;
 
 
@@ -61,11 +61,20 @@ public class PlayerHealth : MonoBehaviour
     void Die()
     {
         isDead = true;
-        if (audioSource && deathSound) audioSource.PlayOneShot(deathSound);
-        gameObject.SetActive(false);  // Oyundan yok olur
-        GameManager.Instance.PlayerDied();
-        
+
+        if (audioSource && deathSound)
+            audioSource.PlayOneShot(deathSound);
+
+        // SADECE VARSA ÇAĞIR:
+        if (GameManager.Instance != null)
+            GameManager.Instance.PlayerDied();
+
+        if (DeathHandler.Instance != null)
+            DeathHandler.Instance.PlayerDied();
+
+        gameObject.SetActive(false); // EN SON devre dışı bırak
     }
+
 
     void OnTriggerEnter2D(Collider2D collision)
 {

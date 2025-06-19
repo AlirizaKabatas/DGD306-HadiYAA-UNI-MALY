@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
+           // DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -49,26 +49,17 @@ public class GameManager : MonoBehaviour
     }
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-
     {
-
-      
-
         // ✅ Sahne adı her durumda kaydediliyor
         currentSceneName = scene.name;
-        gameOverImage = GameObject.Find("GameOverImage");
-        if (gameOverImage != null)
-            gameOverImage.SetActive(false);
 
 
-
-
-
-        if (scene.name.StartsWith("AnaLevel"))
+        if (scene.name == "AnaLevel1")
         {
 
-           
-             // sahne yüklendiğinde gizli olsun
+            
+            if (gameOverImage != null)
+                gameOverImage.SetActive(false); // sahne yüklendiğinde gizli olsun
 
             // Seçilen index'lere göre prefab'ları belirle
             if (player1Index >= 0 && player1Index < allCharacters.Length)
@@ -147,8 +138,8 @@ public class GameManager : MonoBehaviour
                 cam.targets.Add(player2Instance.transform);
             }
 
-           
-                deadPlayerCount = 0; // yeniden say
+
+            deadPlayerCount = 0; // yeniden say
         }
     }
 
