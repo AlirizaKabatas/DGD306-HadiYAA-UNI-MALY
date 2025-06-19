@@ -11,15 +11,15 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Ensar 1/IntroScene.unity
     guid: 4415bbbab5dcf5a4eab5b185ac76975f
+  - enabled: 1
+    path: Assets/ARDA/AnaLevel1.unity
+    guid: 21d2d1277d8921749b4e3c7868bad937
+  - enabled: 1
+    path: Assets/ARDA/AnaLevel2.unity
+    guid: c8905cb02d7cc884cb28b214921760c9
   - enabled: 0
     path: Assets/Ensar 1/CharacterSelect.unity
     guid: b6ce671a028f2427f8d016f7e5c118e9
-  - enabled: 1
-    path: Assets/AnaLevel1.unity
-    guid: 77aa1151a21e01048aa32b97c3cfb0f3
-  - enabled: 1
-    path: Assets/AnaLevel2.unity
-    guid: 2c0aa6df754f05e4e899615e8f1b5ef5
   - enabled: 0
     path: Assets/Ensar 1/Level2.unity
     guid: e8cdf5d564a324649b4dd4d9d23312d9
