@@ -1260,7 +1260,7 @@ MonoBehaviour:
   firePoints_LeftDown:
   - {fileID: 6184634939715263725}
   muzzleFlashPrefab: {fileID: 0}
-  shootSfx: {fileID: 8300000, guid: 39afd55d1354b0a48ad96a9575ed8e10, type: 3}
+  shootSfx: {fileID: 8300000, guid: 8722e8e1b86c5904d9e0c6629579d3a6, type: 3}
   audioSource: {fileID: 0}
   upperBodyRenderer: {fileID: 3978952799528086493}
   spriteRight: {fileID: 21300000, guid: dd12dab38ca864a4395feedf3f408ec2, type: 3}
@@ -1342,6 +1342,7 @@ MonoBehaviour:
   renderers:
   - {fileID: 3978952799528086493}
   - {fileID: 3325044789276321587}
+  audioSource: {fileID: 0}
 --- !u!114 &5024820528349087702
 MonoBehaviour:
   m_ObjectHideFlags: 0
