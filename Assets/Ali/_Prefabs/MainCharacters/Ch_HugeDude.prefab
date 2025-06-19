@@ -1237,7 +1237,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5629193043146675000}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 99be7b0d7c482084cb2e3a991d925977, type: 3}
   m_Name: 
@@ -1260,7 +1260,7 @@ MonoBehaviour:
   firePoints_LeftDown:
   - {fileID: 6184634939715263725}
   muzzleFlashPrefab: {fileID: 0}
-  shootSfx: {fileID: 0}
+  shootSfx: {fileID: 8300000, guid: 39afd55d1354b0a48ad96a9575ed8e10, type: 3}
   audioSource: {fileID: 0}
   upperBodyRenderer: {fileID: 3978952799528086493}
   spriteRight: {fileID: 21300000, guid: dd12dab38ca864a4395feedf3f408ec2, type: 3}
@@ -1286,6 +1286,8 @@ MonoBehaviour:
   speed: 100
   jumpingPower: 220
   variableJumpMultiplier: 0.5
+  audioSource: {fileID: 0}
+  jumpSound: {fileID: 8300000, guid: 8f978807e12dfa14b857a33ea720fe77, type: 3}
   rb: {fileID: 8042517861993647620}
   groundCheck: {fileID: 4842546148665993024}
   groundLayer:
@@ -1301,7 +1303,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5629193043146675000}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9ec8e9475efc0fa4cb3caca2c7404ed8, type: 3}
   m_Name: 
@@ -1309,6 +1311,8 @@ MonoBehaviour:
   speed: 100
   jumpingPower: 220
   variableJumpMultiplier: 0.5
+  audioSource: {fileID: 0}
+  jumpSound: {fileID: 8300000, guid: 8f978807e12dfa14b857a33ea720fe77, type: 3}
   rb: {fileID: 8042517861993647620}
   groundCheck: {fileID: 4842546148665993024}
   groundLayer:
@@ -1364,8 +1368,8 @@ MonoBehaviour:
       m_Calls: []
   m_ActionEvents: []
   m_NeverAutoSwitchControlSchemes: 1
-  m_DefaultControlScheme: Gamepad 1
-  m_DefaultActionMap: Player 1
+  m_DefaultControlScheme: Gamepad 2
+  m_DefaultActionMap: Player 2
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!1 &6599506521522410809
@@ -1492,7 +1496,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &8585104856009627287
 RectTransform:
   m_ObjectHideFlags: 0

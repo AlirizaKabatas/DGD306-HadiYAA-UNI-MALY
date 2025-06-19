@@ -450,7 +450,7 @@ MonoBehaviour:
   firePoints_LeftDown:
   - {fileID: 24648581794769132}
   muzzleFlashPrefab: {fileID: 0}
-  shootSfx: {fileID: 0}
+  shootSfx: {fileID: 8300000, guid: 744c8de480881254e9e368c30b5af924, type: 3}
   audioSource: {fileID: 0}
   upperBodyRenderer: {fileID: 6018278877019649121}
   spriteRight: {fileID: 21300000, guid: 7a898afb9f3b4fe43a9a6d185ebf7a6c, type: 3}
@@ -517,6 +517,8 @@ MonoBehaviour:
   speed: 110
   jumpingPower: 220
   variableJumpMultiplier: 0.5
+  audioSource: {fileID: 0}
+  jumpSound: {fileID: 8300000, guid: 8f978807e12dfa14b857a33ea720fe77, type: 3}
   rb: {fileID: 8215128444017304449}
   groundCheck: {fileID: 9217391708345587764}
   groundLayer:
@@ -540,6 +542,8 @@ MonoBehaviour:
   speed: 120
   jumpingPower: 220
   variableJumpMultiplier: 0.5
+  audioSource: {fileID: 0}
+  jumpSound: {fileID: 8300000, guid: 8f978807e12dfa14b857a33ea720fe77, type: 3}
   rb: {fileID: 8215128444017304449}
   groundCheck: {fileID: 9217391708345587764}
   groundLayer:

@@ -57,6 +57,8 @@ MonoBehaviour:
   randomMovementFactor: 0.5
   flashDuration: 0.2
   alwaysChase: 0
+  deathSound: {fileID: 8300000, guid: b9f1d01b9fdbeb94eb1e6a86aad0421b, type: 3}
+  audioSource: {fileID: 0}
 --- !u!58 &5884395537965599834
 CircleCollider2D:
   m_ObjectHideFlags: 0

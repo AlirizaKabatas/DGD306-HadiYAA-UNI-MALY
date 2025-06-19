@@ -112,10 +112,11 @@ MonoBehaviour:
   attackDamage: 20
   bulletSpeed: 50
   attackSound: {fileID: 0}
-  deathSound: {fileID: 0}
+  deathSound: {fileID: 8300000, guid: b9f1d01b9fdbeb94eb1e6a86aad0421b, type: 3}
   flashDuration: 0.3
   animator: {fileID: 5041108577724899130}
   fireAngle: 45
+  audioSource: {fileID: 0}
 --- !u!95 &5041108577724899130
 Animator:
   serializedVersion: 7

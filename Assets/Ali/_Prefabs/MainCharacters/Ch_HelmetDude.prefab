@@ -804,6 +804,8 @@ MonoBehaviour:
   speed: 120
   jumpingPower: 220
   variableJumpMultiplier: 0.5
+  audioSource: {fileID: 0}
+  jumpSound: {fileID: 8300000, guid: 8f978807e12dfa14b857a33ea720fe77, type: 3}
   rb: {fileID: 1398449619628012371}
   groundCheck: {fileID: 1116375793956067996}
   groundLayer:
@@ -827,6 +829,8 @@ MonoBehaviour:
   speed: 120
   jumpingPower: 220
   variableJumpMultiplier: 0.5
+  audioSource: {fileID: 0}
+  jumpSound: {fileID: 8300000, guid: 8f978807e12dfa14b857a33ea720fe77, type: 3}
   rb: {fileID: 1398449619628012371}
   groundCheck: {fileID: 1116375793956067996}
   groundLayer:

@@ -572,7 +572,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &8746952034474217128
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1354,7 +1354,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8064133651197657023}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 395e8c524bd57854d897059dbec1e503, type: 3}
   m_Name: 
@@ -1383,7 +1383,7 @@ MonoBehaviour:
   - {fileID: 445295897969844347}
   - {fileID: 9047465206717601753}
   muzzleFlashPrefab: {fileID: 0}
-  shootSfx: {fileID: 0}
+  shootSfx: {fileID: 8300000, guid: e079382730f49664b9a629fbef875a27, type: 3}
   audioSource: {fileID: 0}
   upperBodyRenderer: {fileID: 4225016961731766657}
   spriteRight: {fileID: 21300000, guid: ccbeb9c858d40134696e2b26e4f3795c, type: 3}
@@ -1401,7 +1401,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8064133651197657023}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 99be7b0d7c482084cb2e3a991d925977, type: 3}
   m_Name: 
@@ -1448,7 +1448,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8064133651197657023}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f5fab6bdfec2542e885be5e2ceeb554e, type: 3}
   m_Name: 
@@ -1456,6 +1456,8 @@ MonoBehaviour:
   speed: 130
   jumpingPower: 220
   variableJumpMultiplier: 0.5
+  audioSource: {fileID: 0}
+  jumpSound: {fileID: 8300000, guid: 8f978807e12dfa14b857a33ea720fe77, type: 3}
   rb: {fileID: 901950159014787772}
   groundCheck: {fileID: 248821597154411584}
   groundLayer:
@@ -1471,7 +1473,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8064133651197657023}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9ec8e9475efc0fa4cb3caca2c7404ed8, type: 3}
   m_Name: 
@@ -1479,6 +1481,8 @@ MonoBehaviour:
   speed: 130
   jumpingPower: 220
   variableJumpMultiplier: 0.5
+  audioSource: {fileID: 0}
+  jumpSound: {fileID: 8300000, guid: 8f978807e12dfa14b857a33ea720fe77, type: 3}
   rb: {fileID: 901950159014787772}
   groundCheck: {fileID: 248821597154411584}
   groundLayer:
@@ -1534,8 +1538,8 @@ MonoBehaviour:
       m_Calls: []
   m_ActionEvents: []
   m_NeverAutoSwitchControlSchemes: 1
-  m_DefaultControlScheme: Gamepad 2
-  m_DefaultActionMap: Player 2
+  m_DefaultControlScheme: Gamepad 1
+  m_DefaultActionMap: Player 1
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!1 &8144057231062045410

@@ -22,6 +22,11 @@ public class DottopusBoss : MonoBehaviour
     public int orbRandomCount = 4;
     public AudioClip orbSound;
 
+    [Header("Audio Sources")]
+    public AudioSource laserAudioSource;
+    public AudioSource orbAudioSource;
+    public AudioSource aoeAudioSource;
+
     [Header("AoE Attack")]
     public GameObject aoePrefab;
     public Transform[] aoeSpawnPoints;
@@ -44,12 +49,20 @@ public class DottopusBoss : MonoBehaviour
     public Animator attackFaceAnimator;
 
     [Header("Portal Settings")]
-    public GameObject portalPrefab; // Portal prefab�
+    public GameObject portalPrefab; // Portal prefab
     public Transform portalSpawnPoint;
 
     public AudioClip deathSound;
 
+    [Header("Detection")]
+    public float detectionRange = 5f; // Oyuncu algılama mesafesi
+    private Transform player;  // Oyuncu referansı
+
     private AudioSource audioSource;
+
+    private float lastLaserAttackTime;
+    private float lastOrbAttackTime;
+    private float lastAoEAttackTime;
 
     void Start()
     {
@@ -58,9 +71,41 @@ public class DottopusBoss : MonoBehaviour
 
         spriteRenderers = GetComponentsInChildren<SpriteRenderer>();
 
+        player = GameObject.FindGameObjectWithTag("Player").transform; // Oyuncu referansını al
         StartCoroutine(FireLaserRoutine());
         StartCoroutine(FireOrbRoutine());
         StartCoroutine(FireAoERoutine());
+    }
+
+    void Update()
+    {
+        // Oyuncunun boss'a olan mesafesini kontrol et
+        float distanceToPlayer = Vector2.Distance(transform.position, player.position);
+
+        // Eğer oyuncu detectionRange içinde ise ateş et
+        if (distanceToPlayer <= detectionRange)
+        {
+            if (Time.time >= lastLaserAttackTime + laserCooldown)
+            {
+                TriggerAttackFace();
+                FireProjectiles(laserPrefab, laserSpawnPoints, laserSpeed, laserSound, laserAudioSource, laserRandomSpawn, laserRandomCount);
+                lastLaserAttackTime = Time.time;
+            }
+
+            if (Time.time >= lastOrbAttackTime + orbCooldown)
+            {
+                TriggerAttackFace();
+                FireProjectiles(orbPrefab, orbSpawnPoints, orbSpeed, orbSound, orbAudioSource, orbRandomSpawn, orbRandomCount);
+                lastOrbAttackTime = Time.time;
+            }
+
+            if (Time.time >= lastAoEAttackTime + aoeCooldown)
+            {
+                TriggerAttackFace();
+                FireProjectiles(aoePrefab, aoeSpawnPoints, aoeSpeed, aoeSound, aoeAudioSource, aoeRandomSpawn, aoeRandomCount);
+                lastAoEAttackTime = Time.time;
+            }
+        }
     }
 
     IEnumerator FireLaserRoutine()
@@ -68,8 +113,7 @@ public class DottopusBoss : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(laserCooldown);
-            TriggerAttackFace();
-            FireProjectiles(laserPrefab, laserSpawnPoints, laserSpeed, laserSound, laserRandomSpawn, laserRandomCount);
+            FireProjectiles(laserPrefab, laserSpawnPoints, laserSpeed, laserSound, laserAudioSource, laserRandomSpawn, laserRandomCount);
         }
     }
 
@@ -78,8 +122,7 @@ public class DottopusBoss : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(orbCooldown);
-            TriggerAttackFace();
-            FireProjectiles(orbPrefab, orbSpawnPoints, orbSpeed, orbSound, orbRandomSpawn, orbRandomCount);
+            FireProjectiles(orbPrefab, orbSpawnPoints, orbSpeed, orbSound, orbAudioSource, orbRandomSpawn, orbRandomCount);
         }
     }
 
@@ -88,36 +131,49 @@ public class DottopusBoss : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(aoeCooldown);
-            TriggerAttackFace();
-            FireProjectiles(aoePrefab, aoeSpawnPoints, aoeSpeed, aoeSound, aoeRandomSpawn, aoeRandomCount);
+            FireProjectiles(aoePrefab, aoeSpawnPoints, aoeSpeed, aoeSound, aoeAudioSource, aoeRandomSpawn, aoeRandomCount);
         }
     }
 
-    void FireProjectiles(GameObject prefab, Transform[] spawnPoints, float speed, AudioClip sound, bool isRandom, int randomCount)
+    void FireProjectiles(GameObject prefab, Transform[] spawnPoints, float speed, AudioClip sound, AudioSource source, bool isRandom, int randomCount)
     {
-        if (isRandom)
-        {
-            List<int> usedIndexes = new List<int>();
-            int count = Mathf.Min(randomCount, spawnPoints.Length);
-            for (int i = 0; i < count; i++)
-            {
-                int index;
-                do { index = Random.Range(0, spawnPoints.Length); }
-                while (usedIndexes.Contains(index));
-                usedIndexes.Add(index);
+        float distanceToPlayer = Vector2.Distance(transform.position, player.position); // Oyuncu ile mesafeyi hesapla
 
-                FireSingle(prefab, spawnPoints[index], speed);
+        if (distanceToPlayer <= detectionRange) // Eğer oyuncu detectionRange içinde ise
+        {
+            if (isRandom)
+            {
+                List<int> usedIndexes = new List<int>();
+                int count = Mathf.Min(randomCount, spawnPoints.Length);
+                for (int i = 0; i < count; i++)
+                {
+                    int index;
+                    do { index = Random.Range(0, spawnPoints.Length); }
+                    while (usedIndexes.Contains(index));
+                    usedIndexes.Add(index);
+
+                    FireSingle(prefab, spawnPoints[index], speed);
+                }
+            }
+            else
+            {
+                foreach (Transform point in spawnPoints)
+                {
+                    FireSingle(prefab, point, speed);
+                }
+            }
+
+            // Ses çalma
+            if (sound != null && source != null)
+            {
+                Debug.Log("Çalan ses: " + sound.name);  // Test: Ses ismi yazacak
+                source.PlayOneShot(sound);  // Ses çal
+            }
+            else
+            {
+                Debug.LogWarning("Ses kaynağı veya ses dosyası bulunamadı!");
             }
         }
-        else
-        {
-            foreach (Transform point in spawnPoints)
-            {
-                FireSingle(prefab, point, speed);
-            }
-        }
-
-        if (sound && audioSource) audioSource.PlayOneShot(sound);
     }
 
     void FireSingle(GameObject prefab, Transform spawnPoint, float speed)
@@ -166,7 +222,7 @@ public class DottopusBoss : MonoBehaviour
         if (portalPrefab != null && portalSpawnPoint != null)
         {
             Instantiate(portalPrefab, portalSpawnPoint.position, Quaternion.identity);
-            Debug.Log("Portal spawnland�."); // TEST i�in
+            Debug.Log("Portal spawnlandı."); // TEST için
         }
         Destroy(gameObject);
         GameObject healthBarObject = GameObject.Find("DottopusHealthBar");

@@ -346,7 +346,7 @@ MonoBehaviour:
   laserCooldown: 3
   laserRandomSpawn: 1
   laserRandomCount: 8
-  laserSound: {fileID: 0}
+  laserSound: {fileID: 8300000, guid: 1b5f1b5733a943b47a8a05cf682d2b68, type: 3}
   orbPrefab: {fileID: 8099801766738516367, guid: 986dd876243009d4481858e07e6f2493, type: 3}
   orbSpawnPoints:
   - {fileID: 2056875846334680678}
@@ -358,7 +358,10 @@ MonoBehaviour:
   orbCooldown: 17
   orbRandomSpawn: 1
   orbRandomCount: 3
-  orbSound: {fileID: 0}
+  orbSound: {fileID: 8300000, guid: 427847cad5a71d64f819b6957b313031, type: 3}
+  laserAudioSource: {fileID: 0}
+  orbAudioSource: {fileID: 0}
+  aoeAudioSource: {fileID: 0}
   aoePrefab: {fileID: 8050468646392457189, guid: af662a15d0a2581419bc357b6c3ffb0c, type: 3}
   aoeSpawnPoints:
   - {fileID: 2056875846334680678}
@@ -378,11 +381,15 @@ MonoBehaviour:
   aoeCooldown: 10
   aoeRandomSpawn: 1
   aoeRandomCount: 5
-  aoeSound: {fileID: 0}
+  aoeSound: {fileID: 8300000, guid: 9d78153cffad29e459431a23a9a566a3, type: 3}
   maxHealth: 300
   currentHealth: 0
   allBodyAnimator: {fileID: 3627350784698429731}
   attackFaceAnimator: {fileID: 1732164835325878262}
+  portalPrefab: {fileID: 0}
+  portalSpawnPoint: {fileID: 0}
+  deathSound: {fileID: 0}
+  detectionRange: 400
 --- !u!114 &5017249884438398814
 MonoBehaviour:
   m_ObjectHideFlags: 0

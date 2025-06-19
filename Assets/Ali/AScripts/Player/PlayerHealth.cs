@@ -15,14 +15,27 @@ public class PlayerHealth : MonoBehaviour
 
     private int currentHealth;
     private bool isDead = false;
-    private AudioSource audioSource;
+   
+    [SerializeField] private AudioSource audioSource;
 
-    void Start()
+
+   void Start()
+{
+    currentHealth = maxHealth;
+
+    // Eğer audioSource atanmadıysa, bileşen ekleyin
+    if (audioSource == null)
     {
-        currentHealth = maxHealth;
         audioSource = GetComponent<AudioSource>();
-        UpdateHealthUI();
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>(); // Eğer yine yoksa, bir tane ekleriz
+        }
     }
+
+    UpdateHealthUI();
+}
+
 
     void UpdateHealthUI()
     {
@@ -55,19 +68,25 @@ public class PlayerHealth : MonoBehaviour
     }
 
     void OnTriggerEnter2D(Collider2D collision)
+{
+    if (collision.CompareTag("Heal"))
     {
-        if (collision.CompareTag("Heal"))
-        {
-            int healAmount = 20;
-            currentHealth += healAmount;
-            currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
-            UpdateHealthUI();
+        int healAmount = 20;
+        currentHealth += healAmount;
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+        UpdateHealthUI();
 
-            if (audioSource && healSound) audioSource.PlayOneShot(healSound);
-            StartCoroutine(FlashGreen());
-            Destroy(collision.gameObject);
+        // Heal sesinin çalması için kontrol ekleyelim
+        if (audioSource && healSound)
+        {
+            audioSource.PlayOneShot(healSound);
         }
+
+        StartCoroutine(FlashGreen());
+        Destroy(collision.gameObject);
     }
+}
+
 
     IEnumerator FlashGreen()
     {
