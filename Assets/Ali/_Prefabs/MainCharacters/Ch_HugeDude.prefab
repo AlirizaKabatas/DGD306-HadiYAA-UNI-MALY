@@ -1246,7 +1246,7 @@ MonoBehaviour:
   bulletSpeed: 600
   fireRate: 12
   magazineSize: 80
-  reloadDuration: 6
+  reloadDuration: 3
   firePoints_Right:
   - {fileID: 1123061929925766854}
   firePoints_RightUp:

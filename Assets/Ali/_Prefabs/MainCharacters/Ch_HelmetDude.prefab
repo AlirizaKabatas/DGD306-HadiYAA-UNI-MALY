@@ -757,8 +757,8 @@ MonoBehaviour:
   bulletPrefab: {fileID: 6902165046443089589, guid: 3eb2dca6cfe278046b2b3d4779af318e, type: 3}
   bulletSpeed: 400
   fireRate: 1.5
-  magazineSize: 14
-  reloadDuration: 2.5
+  magazineSize: 18
+  reloadDuration: 1.25
   firePoints_Right:
   - {fileID: 7732019810435343760}
   - {fileID: 1862734681838522716}
