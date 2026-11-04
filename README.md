@@ -80,10 +80,10 @@ The central co-op decision is **which two characters play together**. Character 
 ## Additional gameplay artwork
 
 <p align="center">
-  <img src="Assets/ARDA/Uni-maly_MainMenu_Background.png" alt="UNI-MALY stage scene with four playable students and hostile creatures" width="850">
+  <img src="Docs/PortfolioMedia/UNI-MALY-Gameplay-Stage.png" alt="UNI-MALY gameplay with four students and enemies in the anomaly-infested campus" width="850">
 </p>
 
-<p align="center"><sub>Earlier stage composition from the original Unity project's artwork, shown alongside the final boss gameplay capture above.</sub></p>
+<p align="center"><sub>Additional gameplay screenshot from the project, showing the campus stage and characters before the Dottopus encounter.</sub></p>
 
 ## Gameplay & design highlights
 
