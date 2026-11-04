@@ -5,10 +5,10 @@
 **[Download & play on itch.io](https://alikb.itch.io/uni-maly)** · **[Game Design Document](UNI-MALY_GDD.pdf)** · **[Technical overview](Docs/TECHNICAL_OVERVIEW.md)**
 
 <p align="center">
-  <a href="https://alikb.itch.io/uni-maly"><img src="https://img.itch.zone/aW1nLzIyMDc2NDYxLnBuZw==/original/zBtJdU.png" alt="UNI-MALY — official itch.io gameplay screenshot" width="850"></a>
+  <a href="https://alikb.itch.io/uni-maly"><img src="Docs/PortfolioMedia/UNI-MALY-Final-Boss-Gameplay.png" alt="UNI-MALY final boss fight gameplay — both arcade players confronting Dottopus" width="850"></a>
 </p>
 
-<p align="center"><sub>Official screenshot from the <a href="https://alikb.itch.io/uni-maly">UNI-MALY itch.io page</a>.</sub></p>
+<p align="center"><sub>Actual gameplay capture: the two-player battle against Dottopus, the Digital Game Design Club mascot.</sub></p>
 
 > **Project status: Playable student-game prototype.** UNI-MALY was developed as a two-player arcade-cabinet experience and is distributed as a Windows build. It is designed to be played with **two gamepads**, not with a keyboard-and-mouse control scheme.
 
@@ -77,6 +77,14 @@ The central co-op decision is **which two characters play together**. Character 
 *Both boss images are taken from this project's original artwork. The Dottopus image uses a tightly framed view of the source sprite to avoid excess transparent padding.*
 
 
+## Additional gameplay artwork
+
+<p align="center">
+  <img src="Assets/ARDA/Uni-maly_MainMenu_Background.png" alt="UNI-MALY stage scene with four playable students and hostile creatures" width="850">
+</p>
+
+<p align="center"><sub>Earlier stage composition from the original Unity project's artwork, shown alongside the final boss gameplay capture above.</sub></p>
+
 ## Gameplay & design highlights
 
 - **Couch co-op first:** Designed for two players standing or sitting together at an arcade machine, each using a gamepad.
@@ -87,13 +95,22 @@ The central co-op decision is **which two characters play together**. Character 
 - **Boss escalation:** Two encounters with different attack patterns, leading to the Dottopus finale.
 - **University setting:** Original 2D art stages depicting a campus transformed by the anomaly.
 
-## Development and my role
+## Development team & my role
 
-**Ali Rıza Kabataş — Unity Development & Game Design**
+**Ali Rıza Kabataş — Game Designer & Unity Developer**
 
-I contributed to game design and Unity implementation. The repository's `Assets/Ali/` section includes **player movement/shooting, projectile systems, enemy behaviors, boss controllers, health logic, animations and combat assets**. The project is collaborative; the presence of an asset in the repository does **not** mean all of its art, implementation or design was created by me alone.
+I worked on game design and Unity development, including the combat and game systems represented in `Assets/Ali/`: player movement and directional shooting, enemy behaviors, boss controllers, health and projectile systems, and gameplay integration.
 
-**Why this project belongs in my portfolio:** It documents a controller-focused, two-player project built for a physical arcade experience, with character differentiation, combat-system development, boss mechanics and team integration.
+| Team member | Role |
+| --- | --- |
+| **Ali Rıza Kabataş** | **Game Designer & Unity Developer** |
+| **Ensar Özcan** | Game Developer |
+| **Arda Doğruel** | 2D Artist |
+| **Yunus Emre Uludağ** | Sound |
+
+UNI-MALY was developed collaboratively by our four-person student team for an arcade-machine experience. The game's four characters are based on our friend group. **Dottopus**, the Digital Game Design Club mascot, appears as the final boss.
+
+**Portfolio focus:** Team-based game development, controller-first local co-op, character differentiation, 2D combat systems, boss encounters and Unity implementation.
 
 For a closer look at the C# implementation and relevant source paths, read **[Technical Overview](Docs/TECHNICAL_OVERVIEW.md)**.
 
@@ -122,11 +139,9 @@ The repository contains the Unity source project, including art, scenes, scripts
 
 The tracked Unity Editor version is **6000.0.41f1**. To inspect the source, clone the repository and open it with the matching version in Unity Hub. The project was not recompiled or runtime-tested during this documentation update.
 
-## Team & acknowledgments
+## Acknowledgments
 
-UNI-MALY was a **collaborative university project**, featuring four playable characters inspired by our group of friends. Game art, scenes and code were developed across multiple team workstreams.
-
-**Dottopus** is the name of our university Digital Game Design Club's mascot, which we adapted into the final boss. Its use is part of the student project's creative context, not a claim of official university endorsement.
+The team credits and individual roles are listed above. Dottopus is the mascot of our university's Digital Game Design Club and is featured as UNI-MALY's final boss; this student project does not claim official university endorsement.
 
 ---
 
