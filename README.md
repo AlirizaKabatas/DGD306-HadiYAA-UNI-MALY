@@ -5,10 +5,10 @@
 **[Download & play on itch.io](https://alikb.itch.io/uni-maly)** · **[Game Design Document](UNI-MALY_GDD.pdf)** · **[Technical overview](Docs/TECHNICAL_OVERVIEW.md)**
 
 <p align="center">
-  <img src="Assets/ARDA/Uni-maly_MainMenu_Background.png" alt="Original UNI-MALY main-menu background artwork" width="850">
+  <a href="https://alikb.itch.io/uni-maly"><img src="https://img.itch.zone/aW1nLzIyMDc2NDYxLnBuZw==/original/zBtJdU.png" alt="UNI-MALY — official itch.io gameplay screenshot" width="850"></a>
 </p>
 
-<p align="center"><sub>Original main-menu background asset from the Unity project (not a gameplay screenshot).</sub></p>
+<p align="center"><sub>Official screenshot from the <a href="https://alikb.itch.io/uni-maly">UNI-MALY itch.io page</a>.</sub></p>
 
 > **Project status: Playable student-game prototype.** UNI-MALY was developed as a two-player arcade-cabinet experience and is distributed as a Windows build. It is designed to be played with **two gamepads**, not with a keyboard-and-mouse control scheme.
 
@@ -57,14 +57,16 @@ The central co-op decision is **which two characters play together**. Character 
 
 <table>
   <tr>
-    <td align="center" width="50%">
-      <img src="Assets/Ali/Animations/Bosses/Level1Boss_Spider/SpiderBoss_Standing.png" alt="Spider boss sprite" width="200">
-      <br><b>Stage 1 — Spider Boss</b>
+    <td align="center" valign="middle" width="50%">
+      <img src="Assets/Ali/Animations/Bosses/Level1Boss_Spider/SpiderBoss_Standing.png" alt="Spider Boss — first stage enemy" height="215">
     </td>
-    <td align="center" width="50%">
-      <img src="Assets/Ali/Animations/Bosses/Level2Boss_Dottopus/Dottopus_Standing.png" alt="Dottopus boss sprite" width="200">
-      <br><b>Final Stage — Dottopus</b>
+    <td align="center" valign="middle" width="50%">
+      <img src="Docs/PortfolioMedia/Dottopus-Boss-Showcase.svg" alt="Dottopus — final stage boss" height="215">
     </td>
+  </tr>
+  <tr>
+    <td align="center"><b>Stage 1 — Spider Boss</b></td>
+    <td align="center"><b>Final Stage — Dottopus</b></td>
   </tr>
 </table>
 
@@ -72,7 +74,8 @@ The central co-op decision is **which two characters play together**. Character 
 
 **Dottopus:** The final boss and our Digital Game Design Club's mascot. This fight introduces distinct projectile patterns — including **laser, orb and area-of-effect attacks** — to create a multi-pattern co-op encounter.
 
-The repo includes both boss controllers, movement/animation assets and health-bar code.
+*Both boss images are taken from this project's original artwork. The Dottopus image uses a tightly framed view of the source sprite to avoid excess transparent padding.*
+
 
 ## Gameplay & design highlights
 
